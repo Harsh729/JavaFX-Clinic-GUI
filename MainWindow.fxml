@@ -23,7 +23,7 @@
               <MenuItem fx:id="Menu_File_Close" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
                   <MenuItem fx:id="Menu_File_OpenPatient" mnemonicParsing="false" onAction="#openPatientRecord" text="Unspecified Action" />
                   <MenuItem fx:id="Menu_File_OpenLabRecords" mnemonicParsing="false" onAction="#openLabRecords" text="Unspecified Action" />
-                  <MenuItem fx:id="Menu_File_OpenPrescriptions" mnemonicParsing="false" onAction="#openPrescription" text="Unspecified Action" />
+                  <MenuItem fx:id="Menu_File_OpenPrescriptions" mnemonicParsing="false" onAction="#openPrescriptions" text="Unspecified Action" />
             </items>
           </Menu>
           <Menu fx:id="MenuBar_Menu_Edit" mnemonicParsing="false" style="-fx-font-size: 1.5em;" text="Edit">

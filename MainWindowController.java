@@ -100,6 +100,6 @@ public class MainWindowController {
     void openLabRecords(){}
 
     @FXML
-    void openPrescription(){}
+    void openPrescriptions(){}
 
 }
