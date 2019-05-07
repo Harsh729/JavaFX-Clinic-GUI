@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainWindowController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainWindowController">
    <children>
       <MenuBar fx:id="mainMenuBar" prefHeight="38.0" prefWidth="1280.0" VBox.vgrow="ALWAYS">
         <menus>
-          <Menu fx:id="MenuBar_Menu_File" mnemonicParsing="false" style="-fx-font-size: 1.5em;" text="File">
+          <Menu id="head" fx:id="MenuBar_Menu_File" mnemonicParsing="false" text="File">
             <items>
               <MenuItem fx:id="Menu_File_Close" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
                   <MenuItem fx:id="Menu_File_OpenPatient" mnemonicParsing="false" onAction="#openPatientRecord" text="Unspecified Action" />
@@ -26,12 +26,12 @@
                   <MenuItem fx:id="Menu_File_OpenPrescriptions" mnemonicParsing="false" onAction="#openPrescriptions" text="Unspecified Action" />
             </items>
           </Menu>
-          <Menu fx:id="MenuBar_Menu_Edit" mnemonicParsing="false" style="-fx-font-size: 1.5em;" text="Edit">
+          <Menu id="head" fx:id="MenuBar_Menu_Edit" mnemonicParsing="false" text="Edit">
             <items>
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu id="head" mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
@@ -44,22 +44,22 @@
                <children>
                   <VBox AnchorPane.bottomAnchor="373.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button fx:id="ScheduleTabButton" mnemonicParsing="false" onAction="#getScheduleTab" prefHeight="56.0" prefWidth="218.0" text="Schedule" VBox.vgrow="ALWAYS">
+                        <Button id="tab-button" fx:id="ScheduleTabButton" mnemonicParsing="false" onAction="#getScheduleTab" prefHeight="56.0" prefWidth="218.0" text="Schedule" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="System Bold" size="23.0" />
                            </font>
                         </Button>
-                        <Button fx:id="LabWorkTabButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#getLabWorkTab" prefHeight="56.0" prefWidth="218.0" text="Lab Work">
+                        <Button id="tab-button" fx:id="LabWorkTabButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#getLabWorkTab" prefHeight="56.0" prefWidth="218.0" text="Lab Work">
                            <font>
                               <Font name="System Bold" size="23.0" />
                            </font>
                         </Button>
-                        <Button fx:id="PrescriptionsTabButton" layoutX="10.0" layoutY="66.0" mnemonicParsing="false" onAction="#openPrescriptionsTab" prefHeight="56.0" prefWidth="218.0" text="Prescriptions">
+                        <Button id="tab-button" fx:id="PrescriptionsTabButton" layoutX="10.0" layoutY="66.0" mnemonicParsing="false" onAction="#openPrescriptionsTab" prefHeight="56.0" prefWidth="218.0" text="Prescriptions">
                            <font>
                               <Font name="System Bold" size="23.0" />
                            </font>
                         </Button>
-                        <Button layoutX="10.0" layoutY="122.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="218.0" text="Schedule">
+                        <Button id="tab-button" layoutX="10.0" layoutY="122.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="218.0" text="Schedule">
                            <font>
                               <Font name="System Bold" size="23.0" />
                            </font>
@@ -70,6 +70,28 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
+                  <AnchorPane fx:id="PrescriptionsTabAnchorPane" prefHeight="560.0" prefWidth="672.0">
+                     <children>
+                        <SplitPane dividerPositions="0.8978494623655914" orientation="VERTICAL" prefHeight="560.0" prefWidth="672.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="LabWorkAnchorPane" prefHeight="560.0" prefWidth="672.0">
+                     <children>
+                        <TableView fx:id="LabWorkTable" prefHeight="560.0" prefWidth="674.0">
+                          <columns>
+                            <TableColumn fx:id="LabWorkSentDate" prefWidth="75.0" text="Sent Date" />
+                            <TableColumn fx:id="LabWorkPatientName" prefWidth="110.0" text="PatientName" />
+                              <TableColumn fx:id="LabWorkLabName" prefWidth="95.0" text="LabName" />
+                              <TableColumn fx:id="LabWorkWork" prefWidth="93.0" text="Work" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
                   <AnchorPane fx:id="ScheduleAnchorPane" prefHeight="564.0" prefWidth="675.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <SplitPane dividerPositions="0.8850987432675045" orientation="VERTICAL" prefHeight="559.0" prefWidth="675.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -78,9 +100,9 @@
                                  <children>
                                     <TableView fx:id="ScheduleTable" layoutY="44.0" prefHeight="450.0" prefWidth="675.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="44.0">
                                       <columns>
-                                        <TableColumn fx:id="ScehduleTableTimeColumn" prefWidth="75.0" text="Time" />
-                                        <TableColumn fx:id="ScheduleTableNameColumn" prefWidth="221.66668701171875" text="Name" />
-                                          <TableColumn fx:id="ScheduleTableProcedureColumn" prefWidth="322.3333740234375" text="Procedure" />
+                                        <TableColumn id="table-head" fx:id="ScehduleTableTimeColumn" prefWidth="75.0" text="Time" />
+                                        <TableColumn id="table-head" fx:id="ScheduleTableNameColumn" prefWidth="221.66668701171875" text="Name" />
+                                          <TableColumn id="table-head" fx:id="ScheduleTableProcedureColumn" prefWidth="322.3333740234375" text="Procedure" />
                                       </columns>
                                     </TableView>
                                     <Label fx:id="ScheduleDateLabel" alignment="CENTER" layoutX="423.0" layoutY="14.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="238.0" text="&quot;Date&quot;">
@@ -109,28 +131,6 @@
                                     <Insets />
                                  </opaqueInsets>
                               </AnchorPane>
-                          </items>
-                        </SplitPane>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="LabWorkAnchorPane" prefHeight="560.0" prefWidth="672.0">
-                     <children>
-                        <TableView fx:id="LabWorkTable" prefHeight="560.0" prefWidth="674.0">
-                          <columns>
-                            <TableColumn fx:id="LabWorkSentDate" prefWidth="75.0" text="Sent Date" />
-                            <TableColumn fx:id="LabWorkPatientName" prefWidth="110.0" text="PatientName" />
-                              <TableColumn fx:id="LabWorkLabName" prefWidth="95.0" text="LabName" />
-                              <TableColumn fx:id="LabWorkWork" prefWidth="93.0" text="Work" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="PrescriptionsTabAnchorPane" prefHeight="560.0" prefWidth="672.0">
-                     <children>
-                        <SplitPane dividerPositions="0.8978494623655914" orientation="VERTICAL" prefHeight="560.0" prefWidth="672.0">
-                          <items>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                           </items>
                         </SplitPane>
                      </children>
