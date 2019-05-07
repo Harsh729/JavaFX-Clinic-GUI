@@ -15,21 +15,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainWindowController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainWindowController">
     <children>
-        <MenuBar fx:id="mainMenuBar" prefHeight="38.0" prefWidth="1280.0" VBox.vgrow="ALWAYS">
+        <MenuBar id="head" fx:id="mainMenuBar" prefHeight="38.0" prefWidth="1280.0" VBox.vgrow="ALWAYS">
             <menus>
-                <Menu fx:id="MenuBar_Menu_File" mnemonicParsing="false" style="-fx-font-size: 1.5em;" text="File">
+                <Menu id="head" fx:id="MenuBar_Menu_File" mnemonicParsing="false" text="File">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Close" />
                     </items>
                 </Menu>
-                <Menu fx:id="MenuBar_Menu_Edit" mnemonicParsing="false" style="-fx-font-size: 1.5em;" text="Edit">
+                <Menu id="head" fx:id="MenuBar_Menu_Edit" mnemonicParsing="false" text="Edit">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Delete" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu id="head" mnemonicParsing="false" text="Help">
                     <items>
                         <MenuItem mnemonicParsing="false" text="About" />
                     </items>
@@ -42,22 +42,22 @@
                     <children>
                         <VBox AnchorPane.bottomAnchor="373.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
-                                <Button fx:id="ScheduleTabButton" mnemonicParsing="false" onAction="#getScheduleTab" prefHeight="56.0" prefWidth="218.0" text="Schedule" VBox.vgrow="ALWAYS">
+                                <Button id="tab-button" fx:id="ScheduleTabButton" mnemonicParsing="false" onAction="#getScheduleTab" prefHeight="56.0" prefWidth="218.0" text="Schedule" VBox.vgrow="ALWAYS">
                                     <font>
                                         <Font name="System Bold" size="23.0" />
                                     </font>
                                 </Button>
-                                <Button fx:id="LabWorkTabButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#getLabWorkTab" prefHeight="56.0" prefWidth="218.0" text="Lab Work">
+                                <Button id="tab-button" fx:id="LabWorkTabButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#getLabWorkTab" prefHeight="56.0" prefWidth="218.0" text="Lab Work">
                                     <font>
                                         <Font name="System Bold" size="23.0" />
                                     </font>
                                 </Button>
-                                <Button layoutX="10.0" layoutY="66.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="218.0" text="Schedule">
+                                <Button id="tab-button" layoutX="10.0" layoutY="66.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="218.0" text="Schedule">
                                     <font>
                                         <Font name="System Bold" size="23.0" />
                                     </font>
                                 </Button>
-                                <Button layoutX="10.0" layoutY="122.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="218.0" text="Schedule">
+                                <Button id="tab-button" layoutX="10.0" layoutY="122.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="218.0" text="Schedule">
                                     <font>
                                         <Font name="System Bold" size="23.0" />
                                     </font>
@@ -77,14 +77,14 @@
                                             <children>
                                                 <TableView fx:id="ScheduleTable" layoutY="44.0" prefHeight="450.0" prefWidth="675.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="44.0">
                                                     <columns>
-                                                        <TableColumn fx:id="ScehduleTableTimeColumn" prefWidth="75.0" text="Time" />
-                                                        <TableColumn fx:id="ScheduleTableNameColumn" prefWidth="221.66668701171875" text="Name" />
-                                                        <TableColumn fx:id="ScheduleTableProcedureColumn" prefWidth="322.3333740234375" text="Procedure" />
+                                                        <TableColumn id="table-head" fx:id="ScehduleTableTimeColumn" prefWidth="75.0" text="Time" />
+                                                        <TableColumn id="table-head" fx:id="ScheduleTableNameColumn" prefWidth="221.66668701171875" text="Name" />
+                                                        <TableColumn id="table-head" fx:id="ScheduleTableProcedureColumn" prefWidth="375.5" text="Procedure" />
                                                     </columns>
                                                 </TableView>
-                                                <Label fx:id="ScheduleDateLabel" alignment="CENTER" layoutX="423.0" layoutY="14.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="238.0" text="&quot;Date&quot;">
+                                                <Label fx:id="ScheduleDateLabel" alignment="CENTER" layoutX="426.0" layoutY="8.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="17.0" prefWidth="238.0" text="Date:">
                                                     <font>
-                                                        <Font name="Bodoni MT Bold" size="20.0" />
+                                                        <Font size="20.0" />
                                                     </font>
                                                 </Label>
                                             </children>
@@ -93,7 +93,7 @@
                                             <children>
                                                 <HBox alignment="CENTER_RIGHT" prefHeight="107.0" prefWidth="675.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
                                                     <children>
-                                                        <Button fx:id="ScheduleTableEditButton" mnemonicParsing="false" onAction="#openScheduleEditWindow" prefHeight="42.0" prefWidth="85.0" text="Edit" HBox.hgrow="ALWAYS">
+                                                        <Button id="edit-button" fx:id="ScheduleTableEditButton" mnemonicParsing="false" onAction="#openScheduleEditWindow" prefHeight="42.0" prefWidth="85.0" text="Edit" HBox.hgrow="ALWAYS">
                                                             <font>
                                                                 <Font name="System Bold" size="21.0" />
                                                             </font>
