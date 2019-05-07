@@ -11,7 +11,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -21,7 +20,10 @@
         <menus>
           <Menu fx:id="MenuBar_Menu_File" mnemonicParsing="false" style="-fx-font-size: 1.5em;" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem fx:id="Menu_File_Close" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
+                  <MenuItem fx:id="Menu_File_OpenPatient" mnemonicParsing="false" onAction="#openPatientRecord" text="Unspecified Action" />
+                  <MenuItem fx:id="Menu_File_OpenLabRecords" mnemonicParsing="false" onAction="#openLabRecords" text="Unspecified Action" />
+                  <MenuItem fx:id="Menu_File_OpenPrescriptions" mnemonicParsing="false" onAction="#openPrescription" text="Unspecified Action" />
             </items>
           </Menu>
           <Menu fx:id="MenuBar_Menu_Edit" mnemonicParsing="false" style="-fx-font-size: 1.5em;" text="Edit">
@@ -68,7 +70,6 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Pane fx:id="LabWorkPane" prefHeight="761.0" prefWidth="1055.0" />
                   <AnchorPane fx:id="ScheduleAnchorPane" prefHeight="564.0" prefWidth="675.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <SplitPane dividerPositions="0.8850987432675045" orientation="VERTICAL" prefHeight="559.0" prefWidth="675.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -110,6 +111,18 @@
                               </AnchorPane>
                           </items>
                         </SplitPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="LabWorkAnchorPane" prefHeight="560.0" prefWidth="672.0">
+                     <children>
+                        <TableView fx:id="LabWorkTable" prefHeight="560.0" prefWidth="674.0">
+                          <columns>
+                            <TableColumn fx:id="LabWorkSentDate" prefWidth="75.0" text="Sent Date" />
+                            <TableColumn fx:id="LabWorkPatientName" prefWidth="110.0" text="PatientName" />
+                              <TableColumn fx:id="LabWorkLabName" prefWidth="95.0" text="LabName" />
+                              <TableColumn fx:id="LabWorkWork" prefWidth="93.0" text="Work" />
+                          </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
                </children>

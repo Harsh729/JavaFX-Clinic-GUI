@@ -3,12 +3,7 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -21,6 +16,18 @@ public class MainWindowController {
     private Menu MenuBar_Menu_File;
 
     @FXML
+    private MenuItem Menu_File_Close;
+
+    @FXML
+    private MenuItem Menu_File_OpenPatient;
+
+    @FXML
+    private MenuItem Menu_File_OpenLabRecords;
+
+    @FXML
+    private MenuItem Menu_File_OpenPrescriptions;
+
+    @FXML
     private Menu MenuBar_Menu_Edit;
 
     @FXML
@@ -30,7 +37,22 @@ public class MainWindowController {
     private Button LabWorkTabButton;
 
     @FXML
-    private Pane LabWorkPane;
+    private AnchorPane LabWorkAnchorPane;
+
+    @FXML
+    private TableView<?> LabWorkTable;
+
+    @FXML
+    private TableColumn<?, ?> LabWorkSentDate;
+
+    @FXML
+    private TableColumn<?, ?> LabWorkPatientName;
+
+    @FXML
+    private TableColumn<?, ?> LabWorkLabName;
+
+    @FXML
+    private TableColumn<?, ?> LabWorkWork;
 
     @FXML
     private AnchorPane ScheduleAnchorPane;
@@ -67,5 +89,17 @@ public class MainWindowController {
     void openScheduleEditWindow(ActionEvent event) {
 
     }
+
+    @FXML
+    void closeWindow(){}
+
+    @FXML
+    void openPatientRecord(){}
+
+    @FXML
+    void openLabRecords(){}
+
+    @FXML
+    void openPrescription(){}
 
 }
