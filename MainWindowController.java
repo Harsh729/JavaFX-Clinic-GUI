@@ -37,6 +37,9 @@ public class MainWindowController {
     private Button LabWorkTabButton;
 
     @FXML
+    private Button PrescriptionsTabButton;
+
+    @FXML
     private AnchorPane LabWorkAnchorPane;
 
     @FXML
@@ -70,25 +73,34 @@ public class MainWindowController {
     private TableColumn<?, ?> ScheduleTableProcedureColumn;
 
     @FXML
-    private Label ScheduleDateLabel;
+    private DatePicker ScheduleDatePicker;
 
     @FXML
     private Button ScheduleTableEditButton;
 
     @FXML
-    void getLabWorkTab(ActionEvent event) {
+    private AnchorPane PrescriptionsTabAnchorPane;
 
+    @FXML
+    void openLabWorkTab(ActionEvent event) {
+        LabWorkAnchorPane.toFront();
     }
 
     @FXML
-    void getScheduleTab(ActionEvent event) {
+    void openScheduleTab(ActionEvent event) {
+        ScheduleAnchorPane.toFront();
+    }
 
+    @FXML
+    void openPrescriptionsTab(){
+        PrescriptionsTabAnchorPane.toFront();
     }
 
     @FXML
     void openScheduleEditWindow(ActionEvent event) {
 
     }
+
 
     @FXML
     void closeWindow(){}
@@ -101,5 +113,8 @@ public class MainWindowController {
 
     @FXML
     void openPrescriptions(){}
+
+    @FXML
+    void setScheduleDate(){}
 
 }
