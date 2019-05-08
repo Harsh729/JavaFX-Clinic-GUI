@@ -70,18 +70,6 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <AnchorPane fx:id="LabWorkAnchorPane" prefHeight="560.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <TableView fx:id="LabWorkTable" prefHeight="560.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columns>
-                            <TableColumn fx:id="LabWorkSentDate" editable="false" prefWidth="75.0" text="Time" />
-                            <TableColumn fx:id="LabWorkPatientName" prefWidth="110.0" text="Name" />
-                              <TableColumn fx:id="LabWorkLabName" prefWidth="95.0" text="Procedure" />
-                              <TableColumn fx:id="LabWorkWork" prefWidth="93.0" text="Work" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
                   <AnchorPane fx:id="PrescriptionsTabAnchorPane" prefHeight="560.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <SplitPane dividerPositions="0.8978494623655914" orientation="VERTICAL" prefHeight="560.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -133,6 +121,18 @@
                               </AnchorPane>
                           </items>
                         </SplitPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="LabWorkAnchorPane" prefHeight="560.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TableView fx:id="LabWorkTable" prefHeight="560.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn fx:id="LabWorkSentDate" editable="false" prefWidth="75.0" text="Sent Date" />
+                            <TableColumn fx:id="LabWorkPatientName" prefWidth="86.0" text="Patient Name" />
+                              <TableColumn fx:id="LabWorkLabName" prefWidth="95.0" text="Lab Name" />
+                              <TableColumn fx:id="LabWorkWork" prefWidth="93.0" text="Work" />
+                          </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
                </children>
