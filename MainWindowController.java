@@ -39,6 +39,8 @@ public class MainWindowController {
     @FXML
     private Button PrescriptionsTabButton;
 
+    private Button lastSelectedButton=ScheduleTabButton;
+
     @FXML
     private AnchorPane LabWorkAnchorPane;
 
@@ -84,23 +86,31 @@ public class MainWindowController {
     @FXML
     void openLabWorkTab(ActionEvent event) {
         LabWorkAnchorPane.toFront();
+        LabWorkTabButton.getStyleClass().add("tab-button-selected");
+        ScheduleTabButton.getStyleClass().remove("tab-button-selected");
+        PrescriptionsTabButton.getStyleClass().remove("tab-button-selected");
     }
 
     @FXML
     void openScheduleTab(ActionEvent event) {
         ScheduleAnchorPane.toFront();
+        LabWorkTabButton.getStyleClass().remove("tab-button-selected");
+        ScheduleTabButton.getStyleClass().add("tab-button-selected");
+        PrescriptionsTabButton.getStyleClass().remove("tab-button-selected");
     }
 
     @FXML
     void openPrescriptionsTab(){
         PrescriptionsTabAnchorPane.toFront();
+        LabWorkTabButton.getStyleClass().remove("tab-button-selected");
+        ScheduleTabButton.getStyleClass().remove("tab-button-selected");
+        PrescriptionsTabButton.getStyleClass().add("tab-button-selected");
     }
 
     @FXML
     void openScheduleEditWindow(ActionEvent event) {
 
     }
-
 
     @FXML
     void closeWindow(){}
