@@ -1,13 +1,28 @@
 package sample;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+//import ClinicSoftware;
 
 public class MainWindowController {
+
+    void onStart(){
+        //ObservableList<>
+        PrescriptionsTable=new TableView<>();
+        PrescriptionsTable.setEditable(true);
+        PrescriptionsTablePatientNameColumn=new TableColumn<>("Patient Name");
+        PrescriptionsTableDateColumn=new TableColumn<>("Date");
+        PrescriptionsTableMedicinesColumn=new TableColumn<>("Medicines");
+        PrescriptionsTable.getColumns().add(PrescriptionsTableDateColumn);
+        PrescriptionsTable.getColumns().add(PrescriptionsTablePatientNameColumn);
+        PrescriptionsTable.getColumns().add(PrescriptionsTableMedicinesColumn);
+        System.out.println(PrescriptionsTable.getItems().add("Harsh"));
+    }
 
     @FXML
     private MenuBar mainMenuBar;
@@ -39,40 +54,38 @@ public class MainWindowController {
     @FXML
     private Button PrescriptionsTabButton;
 
-    private Button lastSelectedButton=ScheduleTabButton;
-
     @FXML
     private AnchorPane LabWorkAnchorPane;
 
     @FXML
-    private TableView<?> LabWorkTable;
+    private TableView<String> LabWorkTable;
 
     @FXML
-    private TableColumn<?, ?> LabWorkSentDate;
+    private TableColumn<String, String> LabWorkSentDate;
 
     @FXML
-    private TableColumn<?, ?> LabWorkPatientName;
+    private TableColumn<String, String> LabWorkPatientName;
 
     @FXML
-    private TableColumn<?, ?> LabWorkLabName;
+    private TableColumn<String, String> LabWorkLabName;
 
     @FXML
-    private TableColumn<?, ?> LabWorkWork;
+    private TableColumn<String, String> LabWorkWork;
 
     @FXML
     private AnchorPane ScheduleAnchorPane;
 
     @FXML
-    private TableView<?> ScheduleTable;
+    private TableView<String> ScheduleTable;
 
     @FXML
-    private TableColumn<?, ?> ScehduleTableTimeColumn;
+    private TableColumn<String, String> ScehduleTableTimeColumn;
 
     @FXML
-    private TableColumn<?, ?> ScheduleTableNameColumn;
+    private TableColumn<String, String> ScheduleTableNameColumn;
 
     @FXML
-    private TableColumn<?, ?> ScheduleTableProcedureColumn;
+    private TableColumn<String, String> ScheduleTableProcedureColumn;
 
     @FXML
     private DatePicker ScheduleDatePicker;
@@ -84,33 +97,55 @@ public class MainWindowController {
     private AnchorPane PrescriptionsTabAnchorPane;
 
     @FXML
+    private TableView<String> PrescriptionsTable;
+
+    @FXML
+    private TableColumn<String, String> PrescriptionsTablePatientNameColumn;
+
+
+
+    @FXML
+    private TableColumn<String, String> PrescriptionsTableDateColumn;
+
+    @FXML
+    private TableColumn<String, String> PrescriptionsTableMedicinesColumn;
+
+    @FXML
     void openLabWorkTab(ActionEvent event) {
-        LabWorkAnchorPane.toFront();
-        LabWorkTabButton.getStyleClass().add("tab-button-selected");
-        ScheduleTabButton.getStyleClass().remove("tab-button-selected");
-        PrescriptionsTabButton.getStyleClass().remove("tab-button-selected");
+        if(LabWorkTabButton.getStyleClass().size()<2)
+        {
+            LabWorkAnchorPane.toFront();
+            LabWorkTabButton.getStyleClass().add("tab-button-selected");
+            ScheduleTabButton.getStyleClass().remove("tab-button-selected");
+            PrescriptionsTabButton.getStyleClass().remove("tab-button-selected");
+        }
     }
 
     @FXML
     void openScheduleTab(ActionEvent event) {
-        ScheduleAnchorPane.toFront();
-        LabWorkTabButton.getStyleClass().remove("tab-button-selected");
-        ScheduleTabButton.getStyleClass().add("tab-button-selected");
-        PrescriptionsTabButton.getStyleClass().remove("tab-button-selected");
+        if(ScheduleTabButton.getStyleClass().size()<2) {
+            ScheduleAnchorPane.toFront();
+            LabWorkTabButton.getStyleClass().remove("tab-button-selected");
+            ScheduleTabButton.getStyleClass().add("tab-button-selected");
+            PrescriptionsTabButton.getStyleClass().remove("tab-button-selected");
+        }
     }
 
     @FXML
     void openPrescriptionsTab(){
-        PrescriptionsTabAnchorPane.toFront();
-        LabWorkTabButton.getStyleClass().remove("tab-button-selected");
-        ScheduleTabButton.getStyleClass().remove("tab-button-selected");
-        PrescriptionsTabButton.getStyleClass().add("tab-button-selected");
+        if(PrescriptionsTabButton.getStyleClass().size()<2) {
+            PrescriptionsTabAnchorPane.toFront();
+            LabWorkTabButton.getStyleClass().remove("tab-button-selected");
+            ScheduleTabButton.getStyleClass().remove("tab-button-selected");
+            PrescriptionsTabButton.getStyleClass().add("tab-button-selected");
+        }
     }
 
     @FXML
     void openScheduleEditWindow(ActionEvent event) {
 
     }
+
 
     @FXML
     void closeWindow(){}
@@ -126,5 +161,10 @@ public class MainWindowController {
 
     @FXML
     void setScheduleDate(){}
+
+    @FXML
+    void testResponse(){
+        System.out.println("Test successful");
+    }
 
 }
