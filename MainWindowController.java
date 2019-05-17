@@ -1,5 +1,9 @@
 package sample;
 
+import ClinicSoftware.LabWork;
+import ClinicSoftware.LabWorkFile;
+import ClinicSoftware.Schedule;
+import javafx.collections.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,21 +11,34 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-//import ClinicSoftware;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.io.IOException;
+
 
 public class MainWindowController {
 
-    void onStart(){
+    void onStart()throws IOException
+    {
         //ObservableList<>
-        PrescriptionsTable=new TableView<>();
-        PrescriptionsTable.setEditable(true);
-        PrescriptionsTablePatientNameColumn=new TableColumn<>("Patient Name");
-        PrescriptionsTableDateColumn=new TableColumn<>("Date");
-        PrescriptionsTableMedicinesColumn=new TableColumn<>("Medicines");
-        PrescriptionsTable.getColumns().add(PrescriptionsTableDateColumn);
-        PrescriptionsTable.getColumns().add(PrescriptionsTablePatientNameColumn);
-        PrescriptionsTable.getColumns().add(PrescriptionsTableMedicinesColumn);
-        System.out.println(PrescriptionsTable.getItems().add("Harsh"));
+//        PrescriptionsTable=new TableView<Schedule>();
+//        PrescriptionsTable.setEditable(true);
+//        PrescriptionsTablePatientNameColumn=new TableColumn<>("Patient Name");
+//        PrescriptionsTableDateColumn=new TableColumn<>("Date");
+//        PrescriptionsTableMedicinesColumn=new TableColumn<>("Medicines");
+//        PrescriptionsTable.getColumns().add(PrescriptionsTableDateColumn);
+//        PrescriptionsTable.getColumns().add(PrescriptionsTablePatientNameColumn);
+//        PrescriptionsTable.getColumns().add(PrescriptionsTableMedicinesColumn);
+//        System.out.println(PrescriptionsTable.getItems().add("Harsh"));
+//        ScheduleTabButton.getStyleClass().add("tab-button-selected");
+        LabWorkSentDate.setCellValueFactory(new PropertyValueFactory<>("sentDate"));
+        LabWorkPatientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
+        LabWorkLabName.setCellValueFactory(new PropertyValueFactory<>("labName"));
+        LabWorkWork.setCellValueFactory(new PropertyValueFactory<>("work"));
+        LabWorkFile file2=new LabWorkFile("Name 12-1-2019");
+        LabWork lab=file2.readFile("Name 12-1-2019");
+        LabWorkTable.getItems().add(lab);
+
     }
 
     @FXML
@@ -58,34 +75,35 @@ public class MainWindowController {
     private AnchorPane LabWorkAnchorPane;
 
     @FXML
-    private TableView<String> LabWorkTable;
+    private TableView<LabWork> LabWorkTable;
 
     @FXML
-    private TableColumn<String, String> LabWorkSentDate;
+    private TableColumn<String, LabWork> LabWorkSentDate;
 
     @FXML
-    private TableColumn<String, String> LabWorkPatientName;
+    private TableColumn<String, LabWork> LabWorkPatientName;
 
     @FXML
-    private TableColumn<String, String> LabWorkLabName;
+    private TableColumn<String, LabWork> LabWorkLabName;
 
     @FXML
-    private TableColumn<String, String> LabWorkWork;
+    private TableColumn<String, LabWork> LabWorkWork;
 
     @FXML
     private AnchorPane ScheduleAnchorPane;
 
     @FXML
-    private TableView<String> ScheduleTable;
+    private TableView<Schedule> ScheduleTable=new TableView<Schedule>();
 
     @FXML
-    private TableColumn<String, String> ScehduleTableTimeColumn;
+    private TableColumn ScheduleTableTimeColumn=new TableColumn<>();
+
 
     @FXML
-    private TableColumn<String, String> ScheduleTableNameColumn;
+    private TableColumn ScheduleTableNameColumn;
 
     @FXML
-    private TableColumn<String, String> ScheduleTableProcedureColumn;
+    private TableColumn ScheduleTableProcedureColumn;
 
     @FXML
     private DatePicker ScheduleDatePicker;
@@ -97,7 +115,7 @@ public class MainWindowController {
     private AnchorPane PrescriptionsTabAnchorPane;
 
     @FXML
-    private TableView<String> PrescriptionsTable;
+    private TableView<Schedule> PrescriptionsTable;
 
     @FXML
     private TableColumn<String, String> PrescriptionsTablePatientNameColumn;
@@ -160,7 +178,9 @@ public class MainWindowController {
     void openPrescriptions(){}
 
     @FXML
-    void setScheduleDate(){}
+    void setScheduleDate(){
+        System.out.println(ScheduleDatePicker.getValue().toString());
+    }
 
     @FXML
     void testResponse(){

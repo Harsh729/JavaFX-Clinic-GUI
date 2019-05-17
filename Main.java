@@ -16,6 +16,7 @@ public class Main extends Application {
         VBox vBox = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
         primaryStage.setTitle("Clinic Software");
         primaryStage.setScene(new Scene(vBox, 800, 500));
+        MainWindowController obj=new MainWindowController();
         primaryStage.show();
     }
 
