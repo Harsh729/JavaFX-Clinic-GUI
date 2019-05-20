@@ -13,10 +13,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        MainWindowController obj=new MainWindowController();
+        obj.onStart();
         VBox vBox = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
         primaryStage.setTitle("Clinic Software");
         primaryStage.setScene(new Scene(vBox, 800, 500));
-        MainWindowController obj=new MainWindowController();
         primaryStage.show();
     }
 

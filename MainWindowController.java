@@ -31,13 +31,24 @@ public class MainWindowController {
 //        PrescriptionsTable.getColumns().add(PrescriptionsTableMedicinesColumn);
 //        System.out.println(PrescriptionsTable.getItems().add("Harsh"));
 //        ScheduleTabButton.getStyleClass().add("tab-button-selected");
+
+        LabWorkFile file2=new LabWorkFile("Name 12-1-2019");
+        LabWork lab=file2.readFile("Name 12-1-2019");
+
+        ObservableList<LabWork> data=FXCollections.observableArrayList(lab);
+
+        LabWorkTable.setEditable(true);
         LabWorkSentDate.setCellValueFactory(new PropertyValueFactory<>("sentDate"));
         LabWorkPatientName.setCellValueFactory(new PropertyValueFactory<>("patientName"));
         LabWorkLabName.setCellValueFactory(new PropertyValueFactory<>("labName"));
         LabWorkWork.setCellValueFactory(new PropertyValueFactory<>("work"));
-        LabWorkFile file2=new LabWorkFile("Name 12-1-2019");
-        LabWork lab=file2.readFile("Name 12-1-2019");
-        LabWorkTable.getItems().add(lab);
+
+        LabWorkTable.setItems(data);
+
+        System.out.println(LabWorkTable.getColumns().addAll(LabWorkSentDate,LabWorkPatientName,LabWorkLabName,LabWorkWork));
+
+        LabWorkWork.setVisible(false);
+
 
     }
 
@@ -75,19 +86,19 @@ public class MainWindowController {
     private AnchorPane LabWorkAnchorPane;
 
     @FXML
-    private TableView<LabWork> LabWorkTable;
+    private TableView LabWorkTable=new TableView();
 
     @FXML
-    private TableColumn<String, LabWork> LabWorkSentDate;
+    private TableColumn<String, LabWork> LabWorkSentDate=new TableColumn<>("Sent Date");
 
     @FXML
-    private TableColumn<String, LabWork> LabWorkPatientName;
+    private TableColumn<String, LabWork> LabWorkPatientName=new TableColumn<>("Patient Name");
 
     @FXML
-    private TableColumn<String, LabWork> LabWorkLabName;
+    private TableColumn<String, LabWork> LabWorkLabName=new TableColumn<>("Lab Name");
 
     @FXML
-    private TableColumn<String, LabWork> LabWorkWork;
+    private TableColumn<String, LabWork> LabWorkWork=new TableColumn<>("Work");
 
     @FXML
     private AnchorPane ScheduleAnchorPane;
