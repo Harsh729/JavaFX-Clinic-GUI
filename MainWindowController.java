@@ -75,8 +75,8 @@ public class MainWindowController implements Initializable {
 
         ObservableList<Prescription> data=FXCollections.observableArrayList(pre);
 
-        TableColumn PrescriptionDate=new TableColumn();
-        TableColumn PrescriptionPatientName=new TableColumn();
+        TableColumn PrescriptionDate=new TableColumn("Date");
+        TableColumn PrescriptionPatientName=new TableColumn("Patient Name");
 
         PrescriptionsTable.getColumns().addAll(PrescriptionDate,PrescriptionPatientName);
 
