@@ -91,6 +91,7 @@ public class MainWindowController implements Initializable {
 
     public void initializeScheduleTable(String date)
     {
+        ScheduleTable.getColumns().clear();
         Schedule schedule=new Schedule();
         ScheduleFile file=new ScheduleFile(date);
         try {
@@ -241,7 +242,11 @@ public class MainWindowController implements Initializable {
 
     @FXML
     void setScheduleDate(){
-        System.out.println(ScheduleDatePicker.getValue().toString());
+        String date[]=ScheduleDatePicker.getValue().toString().split("-");
+        String mydate=date[2]+"-"+date[1]+"-"+date[0];
+        System.out.println(mydate);
+        //ScheduleTable.getColumns().clear();
+        initializeScheduleTable(mydate);
     }
 
     @FXML
