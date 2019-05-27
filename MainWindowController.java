@@ -13,18 +13,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-//TODO: add "Add" button in scheduleTable pane
-//TODO: add "Patients" tab in tab vbox
-//TODO: add items in "File" in menubar
+
 
 public class MainWindowController implements Initializable {
 
+
+     private String dir="D:\\Java-Blue J\\ClinicGUI\\src\\ClinicSoftware\\";
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -32,22 +32,11 @@ public class MainWindowController implements Initializable {
         initializePrescriptionTable();
         MyDate date=new MyDate();
         String d=date.toString();
-        initializeScheduleTable("27-5-2019");
+        //initializeScheduleTable(d);
     }
 
     public void initializeLabWorkTable()
     {
-        LabWork lab=new LabWork();
-        try {
-            LabWorkFile file2 = new LabWorkFile("Name 12-1-2019");
-            lab = file2.readFile();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        ObservableList<LabWork> data=FXCollections.observableArrayList(lab);
 
         TableColumn LabWorkSentDate=new TableColumn("Sent Date");
         TableColumn LabWorkPatientName=new TableColumn("Patient Name");
@@ -63,7 +52,26 @@ public class MainWindowController implements Initializable {
         LabWorkLabName.setCellValueFactory(new PropertyValueFactory<LabWork,String>("labName"));
         LabWorkWork.setCellValueFactory(new PropertyValueFactory<LabWork,String>("work"));
 
-        LabWorkTable.setItems(data);
+        LabWork lab=new LabWork();
+        try {
+            //LabWorkFile file2 = new LabWorkFile("Name 12-1-2019");
+            File folder=new File(dir+"Lab Work\\");
+            File[] LabWorkFiles=folder.listFiles();
+            ObservableList<LabWork> data = FXCollections.observableArrayList();
+            for(int i=0;i<LabWorkFiles.length;i++) {
+                LabWorkFile labFile = new LabWorkFile(LabWorkFiles[i].getName());
+                lab= labFile.readFile();
+                data.add(lab);
+
+            }
+            LabWorkTable.setItems(data);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
     }
 
     public void initializePrescriptionTable()
