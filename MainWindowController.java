@@ -19,7 +19,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-
+//TODO: add "Add" button in scheduleTable pane
+//TODO: add "Patients" tab in tab vbox
+//TODO: add items in "File" in menubar
 
 public class MainWindowController implements Initializable {
 
@@ -117,11 +119,13 @@ public class MainWindowController implements Initializable {
 
         TableColumn slotColumn=new TableColumn("Time");
         TableColumn appointmentColumnPatientName=new TableColumn("Appointment");
+        TableColumn description=new TableColumn("Description");
 
-        ScheduleTable.getColumns().addAll(slotColumn,appointmentColumnPatientName);
+        ScheduleTable.getColumns().addAll(slotColumn,appointmentColumnPatientName,description);
 
         slotColumn.setCellValueFactory(new PropertyValueFactory<SingleScheduleEntry, String>("time"));
         appointmentColumnPatientName.setCellValueFactory(new PropertyValueFactory<SingleScheduleEntry,String>("patientName"));
+        description.setCellValueFactory(new PropertyValueFactory<SingleScheduleEntry,String>("description"));
 
         ScheduleTable.setItems(data);
     }
