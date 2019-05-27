@@ -61,7 +61,7 @@ public class MainWindowController implements Initializable {
             File[] LabWorkFiles=folder.listFiles();
             ObservableList<LabWork> data = FXCollections.observableArrayList();
             for(int i=0;i<LabWorkFiles.length;i++) {
-                LabWorkFile labFile = new LabWorkFile(LabWorkFiles[i].getName());
+                LabWorkFile labFile = new LabWorkFile(LabWorkFiles[i].getName().split("\\.")[0]);
                 lab= labFile.readFile();
                 data.add(lab);
 
