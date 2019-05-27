@@ -13,18 +13,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-
+//TODO: add functionality to "Add" and "Edit" buttons
+//TODO: add initializePatientTable()
 
 public class MainWindowController implements Initializable {
 
+    private String dir="C:/Anand/Code Projects!/Directories/";
 
-     private String dir="D:\\Java-Blue J\\ClinicGUI\\src\\ClinicSoftware\\";
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -32,7 +34,7 @@ public class MainWindowController implements Initializable {
         initializePrescriptionTable();
         MyDate date=new MyDate();
         String d=date.toString();
-        //initializeScheduleTable(d);
+        initializeScheduleTable(d);
     }
 
     public void initializeLabWorkTable()
@@ -138,6 +140,11 @@ public class MainWindowController implements Initializable {
         ScheduleTable.setItems(data);
     }
 
+    public void initializePatientTable()
+    {
+
+    }
+
     @FXML
     private MenuBar mainMenuBar;
 
@@ -161,6 +168,9 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private Button ScheduleTabButton;
+
+    @FXML
+    private Button ScheduleTableAddButton;
 
     @FXML
     private Button LabWorkTabButton;
@@ -193,15 +203,10 @@ public class MainWindowController implements Initializable {
     private TableView PrescriptionsTable;
 
     @FXML
-    private TableColumn<String, String> PrescriptionsTablePatientNameColumn;
-
-
+    private AnchorPane PatientAnchorPane;
 
     @FXML
-    private TableColumn<String, String> PrescriptionsTableDateColumn;
-
-    @FXML
-    private TableColumn<String, String> PrescriptionsTableMedicinesColumn;
+    private Button PatientTabButton;
 
     @FXML
     void openLabWorkTab(ActionEvent event) {
@@ -210,6 +215,7 @@ public class MainWindowController implements Initializable {
             LabWorkAnchorPane.toFront();
             LabWorkTabButton.getStyleClass().add("tab-button-selected");
             ScheduleTabButton.getStyleClass().remove("tab-button-selected");
+            PatientTabButton.getStyleClass().remove("tab-button-selected");
             PrescriptionsTabButton.getStyleClass().remove("tab-button-selected");
         }
     }
@@ -220,6 +226,7 @@ public class MainWindowController implements Initializable {
             ScheduleAnchorPane.toFront();
             LabWorkTabButton.getStyleClass().remove("tab-button-selected");
             ScheduleTabButton.getStyleClass().add("tab-button-selected");
+            PatientTabButton.getStyleClass().remove("tab-button-selected");
             PrescriptionsTabButton.getStyleClass().remove("tab-button-selected");
         }
     }
@@ -230,7 +237,20 @@ public class MainWindowController implements Initializable {
             PrescriptionsTabAnchorPane.toFront();
             LabWorkTabButton.getStyleClass().remove("tab-button-selected");
             ScheduleTabButton.getStyleClass().remove("tab-button-selected");
+            PatientTabButton.getStyleClass().remove("tab-button-selected");
             PrescriptionsTabButton.getStyleClass().add("tab-button-selected");
+        }
+    }
+
+    @FXML
+    void openPatientTab()
+    {
+        if(PatientTabButton.getStyleClass().size()<2) {
+            PatientAnchorPane.toFront();
+            LabWorkTabButton.getStyleClass().remove("tab-button-selected");
+            ScheduleTabButton.getStyleClass().remove("tab-button-selected");
+            PrescriptionsTabButton.getStyleClass().remove("tab-button-selected");
+            PatientTabButton.getStyleClass().add("tab-button-selected");
         }
     }
 
@@ -238,6 +258,10 @@ public class MainWindowController implements Initializable {
     void openScheduleEditWindow(ActionEvent event) {
 
     }
+
+    @FXML
+    void openScheduleAddWindow(ActionEvent event)
+    {}
 
 
     @FXML
