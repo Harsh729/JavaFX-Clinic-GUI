@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -27,7 +28,9 @@ public class MainWindowController implements Initializable {
     {
         initializeLabWorkTable();
         initializePrescriptionTable();
-        initializeScheduleTable();
+        MyDate date=new MyDate();
+        String d=date.toString();
+        initializeScheduleTable("27-5-2019");
     }
 
     public void initializeLabWorkTable()
@@ -86,10 +89,10 @@ public class MainWindowController implements Initializable {
         PrescriptionsTable.setItems(data);
     }
 
-    public void initializeScheduleTable()
+    public void initializeScheduleTable(String date)
     {
         Schedule schedule=new Schedule();
-        ScheduleFile file=new ScheduleFile("12-01-2019");
+        ScheduleFile file=new ScheduleFile(date);
         try {
             schedule = file.readFile();
         }
