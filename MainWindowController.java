@@ -34,6 +34,7 @@ public class MainWindowController implements Initializable {
         initializePrescriptionTable();
         MyDate date=new MyDate();
         String d=date.toString();
+        System.out.println(d);
         initializeScheduleTable(d);
     }
 
@@ -114,8 +115,17 @@ public class MainWindowController implements Initializable {
             e.printStackTrace();
         }
 
-        LinkedList<Slot> slots=schedule.getSlots();
-        LinkedList<Appointment> appointments=schedule.getAppointments();
+        LinkedList<Slot> slots=new LinkedList<>();
+        LinkedList<Appointment> appointments=new LinkedList<>();
+
+        try {
+            slots = schedule.getSlots();
+            appointments = schedule.getAppointments();
+        }
+        catch(NullPointerException e)
+        {
+            System.err.println("Null pointer exception, probably because File was not found");
+        }
 
         Iterator i=slots.iterator();
         Iterator j=appointments.iterator();
