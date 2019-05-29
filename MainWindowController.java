@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 //TODO: add functionality to "Add" and "Edit" buttons
 //TODO: add initializePatientTable()
+//TODO: add column in scheduletable depicting description
 
 public class MainWindowController implements Initializable {
 
@@ -36,6 +37,7 @@ public class MainWindowController implements Initializable {
         String d=date.toString();
         System.out.println(d);
         initializeScheduleTable(d);
+        initializePatientTable();
     }
 
     public void initializeLabWorkTable()
@@ -157,6 +159,32 @@ public class MainWindowController implements Initializable {
 
     public void initializePatientTable()
     {
+        TableColumn patientName=new TableColumn("Patient Name");
+        TableColumn phone=new TableColumn("Phone No.");
+        TableColumn age=new TableColumn("Age");
+
+        PatientTable.getColumns().addAll(patientName,phone,age);
+
+        patientName.setCellValueFactory(new PropertyValueFactory<Record,String>("name"));
+        phone.setCellValueFactory(new PropertyValueFactory<Record,String>("phone"));
+        age.setCellValueFactory(new PropertyValueFactory<Record,Integer>("age"));
+
+        try{
+            File folder=new File(dir+"Records\\");
+            File[] RecordFiles=folder.listFiles();
+            ObservableList<Record> data=FXCollections.observableArrayList();
+            for(File file: RecordFiles)
+            {
+                RecordFile recordFile=new RecordFile(file.getName().split("\\.")[0]);
+                Record rec=recordFile.readFile();
+                data.add(rec);
+            }
+            PatientTable.setItems(data);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
 
     }
 
@@ -222,6 +250,9 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private Button PatientTabButton;
+
+    @FXML
+    private TableView PatientTable;
 
     @FXML
     void openLabWorkTab(ActionEvent event) {
