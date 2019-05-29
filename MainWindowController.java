@@ -79,18 +79,6 @@ public class MainWindowController implements Initializable {
 
     public void initializePrescriptionTable()
     {
-        Prescription pre=new Prescription();
-        try {
-            PrescriptionFile file = new PrescriptionFile("Name2 14-01-2019");
-            pre = file.readFile();
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-
-        ObservableList<Prescription> data=FXCollections.observableArrayList(pre);
-
         TableColumn PrescriptionDate=new TableColumn("Date");
         TableColumn PrescriptionPatientName=new TableColumn("Patient Name");
 
@@ -99,7 +87,24 @@ public class MainWindowController implements Initializable {
         PrescriptionDate.setCellValueFactory(new PropertyValueFactory<Prescription,String>("date"));
         PrescriptionPatientName.setCellValueFactory(new PropertyValueFactory<Prescription,String>("patientName"));
 
-        PrescriptionsTable.setItems(data);
+        Prescription pre=new Prescription();
+        try {
+            //LabWorkFile file2 = new LabWorkFile("Name 12-1-2019");
+            File folder=new File(dir+"Prescriptions\\");
+            File[] PrescriptionFiles=folder.listFiles();
+            ObservableList<Prescription> data = FXCollections.observableArrayList();
+            for(int i=0;i<PrescriptionFiles.length;i++) {
+                PrescriptionFile prescriptionFile = new PrescriptionFile(PrescriptionFiles[i].getName().split("\\.")[0]);
+                pre=prescriptionFile.readFile();
+                data.add(pre);
+
+            }
+            PrescriptionsTable.setItems(data);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void initializeScheduleTable(String date)
