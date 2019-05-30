@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,9 +22,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 //TODO: add functionality to "Add" and "Edit" buttons
-//TODO: add initializePatientTable()
-//TODO: add column in scheduletable depicting description
-
+//TODO: add functionality to MenuBar
 public class MainWindowController implements Initializable {
 
     private String dir="C:/Anand/Code Projects!/Directories/";
@@ -35,7 +34,7 @@ public class MainWindowController implements Initializable {
         initializePrescriptionTable();
         MyDate date=new MyDate();
         String d=date.toString();
-        System.out.println(d);
+        //System.out.println(d);
         initializeScheduleTable(d);
         initializePatientTable();
     }
@@ -311,7 +310,11 @@ public class MainWindowController implements Initializable {
 
 
     @FXML
-    void closeWindow(){}
+    void closeWindow(){
+        Stage stage=(Stage) ScheduleTabButton.getScene().getWindow();
+        stage.close();
+
+    }
 
     @FXML
     void openPatientRecord(){}
