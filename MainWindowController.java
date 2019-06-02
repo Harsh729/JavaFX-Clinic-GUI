@@ -111,7 +111,7 @@ public class MainWindowController implements Initializable {
     public void initializeScheduleTable(String date)
     {
         ScheduleTable.getColumns().clear();
-        Schedule schedule=new Schedule();
+        schedule=new Schedule();
         ScheduleFile file=new ScheduleFile(date);
         try {
             schedule = file.readFile();
@@ -186,6 +186,8 @@ public class MainWindowController implements Initializable {
         }
 
     }
+
+    public Schedule schedule;
 
     @FXML
     private MenuBar mainMenuBar;
@@ -306,7 +308,19 @@ public class MainWindowController implements Initializable {
 
     @FXML
     void openScheduleAddWindow(ActionEvent event)
-    {}
+    {
+        AddScheduleWindowController obj=new AddScheduleWindowController();
+        obj.setSchedule(schedule);
+        AddScheduleWindowMain obj2=new AddScheduleWindowMain();
+        Stage stage=new Stage();
+        try {
+            obj2.start(stage);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 
 
     @FXML
@@ -327,11 +341,16 @@ public class MainWindowController implements Initializable {
 
     @FXML
     void setScheduleDate(){
-        String date[]=ScheduleDatePicker.getValue().toString().split("-");
-        String mydate=date[2]+"-"+date[1]+"-"+date[0];
+        String mydate=dateExtract();
         System.out.println(mydate);
         //ScheduleTable.getColumns().clear();
         initializeScheduleTable(mydate);
+    }
+
+    String dateExtract()
+    {
+        String date[]=ScheduleDatePicker.getValue().toString().split("-");
+        return date[2]+"-"+date[1]+"-"+date[0];
     }
 
     @FXML
