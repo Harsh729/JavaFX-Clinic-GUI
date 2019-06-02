@@ -86,6 +86,8 @@ public class AddScheduleWindowController implements Initializable {
     @FXML
     private Button acceptButton;
 
+    private ObservableList<String> data=FXCollections.observableArrayList();
+
    @FXML
    public void save(ActionEvent event)
     {
@@ -96,8 +98,10 @@ public class AddScheduleWindowController implements Initializable {
     @FXML
     public void slotChooserStart(ActionEvent event)
     {
-        MenuItem newSlot=(MenuItem)event.getSource();
-        slot=new Slot(newSlot.getText());
+        ComboBox newSlot=(ComboBox) event.getSource();
+        String slotStart=newSlot.getValue().toString();
+        slotChooserEnd.getItems().clear();
+        slotChooserEnd.setItems(getValidSlots(slotStart));
     }
 
 
@@ -158,6 +162,20 @@ public class AddScheduleWindowController implements Initializable {
         return availableSlots;
     }
 
+    public ObservableList<String> getValidSlots(String slot)
+    {
+        for(int i=0;i<data.size();i++)
+        {
+            if(slot.equals(data.get(0)))
+            {
+                data.remove(0);
+                break;
+            }
+            data.remove(0);
+        }
+        return data;
+    }
+
     public void createComboBoxItems()
     {
          LinkedList<String> occupiedSlots=generateOccupiedSlots();
@@ -166,12 +184,13 @@ public class AddScheduleWindowController implements Initializable {
 
          availableSlots=generateAvailableSlots(availableSlots,occupiedSlots);
 
-         ObservableList<String> data=FXCollections.observableList(availableSlots);
+         data=FXCollections.observableList(availableSlots);
 
          try {
              slotChooserStart.setPromptText("Start Time");
              slotChooserEnd.setPromptText("End Time");
              slotChooserStart.setItems(data);
+             slotChooserEnd.setItems(data);
              }
 
          catch(NullPointerException e)
