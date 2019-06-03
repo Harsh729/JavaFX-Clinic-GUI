@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Iterator;
@@ -107,7 +108,10 @@ public class AddScheduleWindowController implements Initializable {
 
     @FXML
     public void cancel()
-    {}
+    {
+        Stage stage=(Stage)cancelButton.getScene().getWindow();
+        stage.close();
+    }
 
     public LinkedList<String> generateAllSlots()
     {
