@@ -1,9 +1,6 @@
 package sample;
 
-import ClinicSoftware.Appointment;
-import ClinicSoftware.Schedule;
-import ClinicSoftware.SingleScheduleEntry;
-import ClinicSoftware.Slot;
+import ClinicSoftware.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -22,7 +20,11 @@ import java.util.ResourceBundle;
 public class AddScheduleWindowController implements Initializable {
 
 
-    Slot slot;
+    String slotStart;
+    String slotEnd;
+
+    Slot slot=new Slot();
+
     static Schedule schedule=new Schedule();
 
     public void setSchedule(Schedule schedule)
@@ -90,21 +92,53 @@ public class AddScheduleWindowController implements Initializable {
     private ObservableList<String> data=FXCollections.observableArrayList();
 
    @FXML
-   public void save(ActionEvent event)
+   public void save()
     {
-//    Appointment appointment=new Appointment()
-//        SingleScheduleEntry scheduleEntry=new SingleScheduleEntry(slot,appointment);
+        try {
+            Record newPatient = new Record(nameTextField.getText(), phoneTextField.getText());
+            RecordFile patientFile = new RecordFile(newPatient.getFileName());
+            Record existingRecord=patientFile.readFile();
+            if(existingRecord!=null)
+            {
+                newPatient=existingRecord;
+            }
+            LinkedList<String> timeSlotsString=getTimeSlot();
+            LinkedList<Slot>  timeSlotsSlot=new LinkedList<>();
+            ScheduleFile newScheduleFile=new ScheduleFile(schedule);
+            for(int i=0;i<timeSlotsString.size();i++)
+            {
+                timeSlotsSlot.add(slot.toSlot(timeSlotsString.get(i)));
+                Appointment newAppointment=new Appointment(newPatient,schedule.getDate(),timeSlotsSlot.get(i));
+                newScheduleFile.addEntry(newAppointment);
+            }
+
+
+
+        }
+        catch(IOException e)
+        {
+            System.err.println("IOException caught.");
+        }
+        cancel();
+       MainWindowController object=new MainWindowController();
+       object.initializeScheduleTable(schedule.getDate());
     }
 
     @FXML
-    public void slotChooserStart(ActionEvent event)
+    public void setSlotStart(ActionEvent event)
     {
-        ComboBox newSlot=(ComboBox) event.getSource();
-        String slotStart=newSlot.getValue().toString();
-        slotChooserEnd.getItems().clear();
+
+        slotStart=slotChooserStart.getValue().toString();
+        System.out.println(slotStart);
+//        slotChooserEnd.getItems().clear();
         slotChooserEnd.setItems(getValidSlots(slotStart));
     }
 
+    @FXML
+    public void setSlotEnd(ActionEvent event)
+    {
+        slotEnd=slotChooserEnd.getValue().toString();
+    }
 
     @FXML
     public void cancel()
@@ -168,16 +202,17 @@ public class AddScheduleWindowController implements Initializable {
 
     public ObservableList<String> getValidSlots(String slot)
     {
-        for(int i=0;i<data.size();i++)
+        ObservableList<String> dataCopy=FXCollections.observableArrayList(data);
+        for(int i=0;i<dataCopy.size();i++)
         {
-            if(slot.equals(data.get(0)))
+            if(slot.equals(dataCopy.get(0)))
             {
-                data.remove(0);
+                dataCopy.remove(0);
                 break;
             }
-            data.remove(0);
+            dataCopy.remove(0);
         }
-        return data;
+        return dataCopy;
     }
 
     public void createComboBoxItems()
@@ -201,5 +236,28 @@ public class AddScheduleWindowController implements Initializable {
          {
              System.err.println("Null pointer exception, probably because File was not found");
          }
+    }
+
+    public LinkedList<String> getTimeSlot()
+    {
+        LinkedList<String> allSlots=generateAllSlots();
+        LinkedList<String> selectedSlots=new LinkedList<>();
+        boolean slotInRange=false;
+
+        for(int i=0;i<allSlots.size();i++)
+        {
+            if(allSlots.get(i).equals(slotStart)) {
+                selectedSlots.add(slotStart);
+                slotInRange = true;
+            }
+            if(slotInRange)
+                selectedSlots.add(allSlots.get(i));
+            if(allSlots.get(i).equals(slotEnd))
+            {
+                selectedSlots.add(slotEnd);
+                slotInRange=false;
+            }
+        }
+        return selectedSlots;
     }
 }

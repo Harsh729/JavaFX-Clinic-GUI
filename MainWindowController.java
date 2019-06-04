@@ -14,19 +14,18 @@ import javafx.scene.layout.Pane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-//TODO: add functionality to "Edit" button
-//TODO: add functionality to MenuBar
+
+
 public class MainWindowController implements Initializable {
 
-    private String dir="C:/Anand/Code Projects!/Directories/";
 
+     private String dir="D:\\Java-Blue J\\ClinicGUI\\src\\ClinicSoftware\\";
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -34,7 +33,7 @@ public class MainWindowController implements Initializable {
         initializePrescriptionTable();
         MyDate date=new MyDate();
         String d=date.toString();
-        //System.out.println(d);
+        System.out.println(d);
         initializeScheduleTable(d);
         initializePatientTable();
     }
@@ -110,7 +109,13 @@ public class MainWindowController implements Initializable {
 
     public void initializeScheduleTable(String date)
     {
-        ScheduleTable.getColumns().clear();
+        try {
+            ScheduleTable.getColumns().clear();
+        }
+        catch(NullPointerException e)
+        {
+            System.err.println("Null pointer exception");
+        }
         schedule=new Schedule();
         ScheduleFile file=new ScheduleFile(date);
         try {
@@ -121,11 +126,11 @@ public class MainWindowController implements Initializable {
             e.printStackTrace();
         }
 
-        LinkedList<Slot> slots=new LinkedList<>();
+
         LinkedList<Appointment> appointments=new LinkedList<>();
 
         try {
-            slots = schedule.getSlots();
+
             appointments = schedule.getAppointments();
         }
         catch(NullPointerException e)
@@ -133,14 +138,14 @@ public class MainWindowController implements Initializable {
             System.err.println("Null pointer exception, probably because File was not found");
         }
 
-        Iterator i=slots.iterator();
+
         Iterator j=appointments.iterator();
 
         ObservableList<SingleScheduleEntry> data=FXCollections.observableArrayList();
 
-        while(i.hasNext()&&j.hasNext())
+        while(j.hasNext())
         {
-            data.add(new SingleScheduleEntry((Slot)i.next(),(Appointment)j.next()));
+            data.add(new SingleScheduleEntry((Appointment)j.next()));
         }
 
         TableColumn slotColumn=new TableColumn("Time");
@@ -161,14 +166,12 @@ public class MainWindowController implements Initializable {
         TableColumn patientName=new TableColumn("Patient Name");
         TableColumn phone=new TableColumn("Phone No.");
         TableColumn age=new TableColumn("Age");
-        TableColumn money=new TableColumn("Pending amount");
 
-        PatientTable.getColumns().addAll(patientName,phone,age,money);
+        PatientTable.getColumns().addAll(patientName,phone,age);
 
         patientName.setCellValueFactory(new PropertyValueFactory<Record,String>("name"));
         phone.setCellValueFactory(new PropertyValueFactory<Record,String>("phone"));
         age.setCellValueFactory(new PropertyValueFactory<Record,Integer>("age"));
-        money.setCellValueFactory(new PropertyValueFactory<Record,Double>("paid"));
 
         try{
             File folder=new File(dir+"Records\\");
