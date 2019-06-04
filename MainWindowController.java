@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-//TODO: add functionality to "Add" and "Edit" buttons
+//TODO: add functionality to "Edit" button
 //TODO: add functionality to MenuBar
 public class MainWindowController implements Initializable {
 
@@ -161,12 +161,14 @@ public class MainWindowController implements Initializable {
         TableColumn patientName=new TableColumn("Patient Name");
         TableColumn phone=new TableColumn("Phone No.");
         TableColumn age=new TableColumn("Age");
+        TableColumn money=new TableColumn("Pending amount");
 
-        PatientTable.getColumns().addAll(patientName,phone,age);
+        PatientTable.getColumns().addAll(patientName,phone,age,money);
 
         patientName.setCellValueFactory(new PropertyValueFactory<Record,String>("name"));
         phone.setCellValueFactory(new PropertyValueFactory<Record,String>("phone"));
         age.setCellValueFactory(new PropertyValueFactory<Record,Integer>("age"));
+        money.setCellValueFactory(new PropertyValueFactory<Record,Double>("paid"));
 
         try{
             File folder=new File(dir+"Records\\");
