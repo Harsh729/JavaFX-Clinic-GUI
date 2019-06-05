@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
+//TODO: add a close /terminate method to restart the window
 public class Main extends Application {
 
     @Override
@@ -19,6 +19,19 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    public static void open()
+    {
+        try {
+            Stage stage = new Stage();
+            Main obj = new Main();
+            obj.start(stage);
+        }
+        catch(Exception e)
+        {
+            System.err.println("An unknown Exception occurred:");
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         launch(args);
