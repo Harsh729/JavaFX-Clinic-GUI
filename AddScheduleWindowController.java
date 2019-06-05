@@ -109,19 +109,17 @@ public class AddScheduleWindowController implements Initializable {
             {
                 timeSlotsSlot.add(slot.toSlot(timeSlotsString.get(i)));
                 Appointment newAppointment=new Appointment(newPatient,schedule.getDate(),timeSlotsSlot.get(i));
+                AppointmentFile appointmentFile=new AppointmentFile(newAppointment);
                 newScheduleFile.addEntry(newAppointment);
             }
-
-
-
+            //String args[]={};
         }
         catch(IOException e)
         {
             System.err.println("IOException caught.");
         }
         cancel();
-       MainWindowController object=new MainWindowController();
-       object.initializeScheduleTable(schedule.getDate());
+        Main.open();
     }
 
     @FXML
@@ -203,11 +201,11 @@ public class AddScheduleWindowController implements Initializable {
     public ObservableList<String> getValidSlots(String slot)
     {
         ObservableList<String> dataCopy=FXCollections.observableArrayList(data);
-        for(int i=0;i<dataCopy.size();i++)
+        int n=dataCopy.size();
+        for(int i=0;i<n;i++)
         {
             if(slot.equals(dataCopy.get(0)))
             {
-                dataCopy.remove(0);
                 break;
             }
             dataCopy.remove(0);
