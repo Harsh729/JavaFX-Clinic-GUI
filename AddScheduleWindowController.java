@@ -102,6 +102,10 @@ public class AddScheduleWindowController implements Initializable {
             {
                 newPatient=existingRecord;
             }
+            else
+            {
+                RecordFile rf=new RecordFile(newPatient);
+            }
             LinkedList<String> timeSlotsString=getTimeSlot();
             LinkedList<Slot>  timeSlotsSlot=new LinkedList<>();
             ScheduleFile newScheduleFile=new ScheduleFile(schedule);
@@ -110,7 +114,10 @@ public class AddScheduleWindowController implements Initializable {
                 timeSlotsSlot.add(slot.toSlot(timeSlotsString.get(i)));
                 Appointment newAppointment=new Appointment(newPatient,schedule.getDate(),timeSlotsSlot.get(i));
                 AppointmentFile appointmentFile=new AppointmentFile(newAppointment);
-                newScheduleFile.addEntry(newAppointment);
+                if(newScheduleFile.addEntry(newAppointment)==null)
+                {
+                    System.out.println("Entry added successfully");
+                }
             }
             //String args[]={};
         }
@@ -240,21 +247,13 @@ public class AddScheduleWindowController implements Initializable {
     {
         LinkedList<String> allSlots=generateAllSlots();
         LinkedList<String> selectedSlots=new LinkedList<>();
-        boolean slotInRange=false;
 
-        for(int i=0;i<allSlots.size();i++)
+        int start=allSlots.indexOf(slotStart);
+        int end=allSlots.indexOf(slotEnd);
+
+        for(int i=start;i<=end;i++)
         {
-            if(allSlots.get(i).equals(slotStart)) {
-                selectedSlots.add(slotStart);
-                slotInRange = true;
-            }
-            if(slotInRange)
-                selectedSlots.add(allSlots.get(i));
-            if(allSlots.get(i).equals(slotEnd))
-            {
-                selectedSlots.add(slotEnd);
-                slotInRange=false;
-            }
+            selectedSlots.add(allSlots.get(i));
         }
         return selectedSlots;
     }

@@ -28,8 +28,8 @@
                         <TextField fx:id="nameTextField" layoutX="82.0" layoutY="87.0" prefHeight="25.0" prefWidth="192.0" />
                         <TextField fx:id="phoneTextField" layoutX="89.0" layoutY="118.0" prefHeight="25.0" prefWidth="185.0" />
                         <TextArea fx:id="descriptionTextArea" layoutX="109.0" layoutY="158.0" prefHeight="75.0" prefWidth="165.0" />
-                  <ComboBox fx:id="slotChooserStart" layoutX="72.0" layoutY="57.0" onAction="#slotChooserStart" prefHeight="25.0" prefWidth="104.0" />
-                  <ComboBox fx:id="slotChooserEnd" layoutX="222.0" layoutY="57.0" prefHeight="25.0" prefWidth="104.0" />
+                  <ComboBox fx:id="slotChooserStart" layoutX="72.0" layoutY="57.0" onAction="#setSlotStart" prefHeight="25.0" prefWidth="104.0" />
+                  <ComboBox fx:id="slotChooserEnd" layoutX="222.0" layoutY="57.0" onAction="#setSlotEnd" prefHeight="25.0" prefWidth="104.0" />
                   <Label layoutX="193.0" layoutY="61.0" text="to" />
                     </children>
                 </AnchorPane>

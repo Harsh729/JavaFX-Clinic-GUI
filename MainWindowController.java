@@ -14,18 +14,19 @@ import javafx.scene.layout.Pane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-
-
+//TODO: add functionality to "Edit" button
+//TODO: add functionality to MenuBar
 public class MainWindowController implements Initializable {
 
+    private String dir="C:/Anand/Code Projects!/Directories/";
 
-     private String dir="D:\\Java-Blue J\\ClinicGUI\\src\\ClinicSoftware\\";
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -33,7 +34,7 @@ public class MainWindowController implements Initializable {
         initializePrescriptionTable();
         MyDate date=new MyDate();
         String d=date.toString();
-        System.out.println(d);
+        //System.out.println(d);
         initializeScheduleTable(d);
         initializePatientTable();
     }
@@ -166,12 +167,14 @@ public class MainWindowController implements Initializable {
         TableColumn patientName=new TableColumn("Patient Name");
         TableColumn phone=new TableColumn("Phone No.");
         TableColumn age=new TableColumn("Age");
+        TableColumn money=new TableColumn("Pending amount");
 
-        PatientTable.getColumns().addAll(patientName,phone,age);
+        PatientTable.getColumns().addAll(patientName,phone,age,money);
 
         patientName.setCellValueFactory(new PropertyValueFactory<Record,String>("name"));
         phone.setCellValueFactory(new PropertyValueFactory<Record,String>("phone"));
         age.setCellValueFactory(new PropertyValueFactory<Record,Integer>("age"));
+        money.setCellValueFactory(new PropertyValueFactory<Record,Double>("paid"));
 
         try{
             File folder=new File(dir+"Records\\");
