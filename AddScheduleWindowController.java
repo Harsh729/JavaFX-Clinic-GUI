@@ -91,6 +91,8 @@ public class AddScheduleWindowController implements Initializable {
 
     private ObservableList<String> data=FXCollections.observableArrayList();
 
+    public static MainWindowController obj;//for closing
+
    @FXML
    public void save()
     {
@@ -127,6 +129,7 @@ public class AddScheduleWindowController implements Initializable {
         }
         cancel();
         Main.open();
+        obj.closeWindow();
     }
 
     @FXML

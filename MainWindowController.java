@@ -322,20 +322,20 @@ public class MainWindowController implements Initializable {
         AddScheduleWindowMain obj2=new AddScheduleWindowMain();
         Stage stage=new Stage();
         try {
+            obj2.setMainWindowController(this);
             obj2.start(stage);
         }
         catch(Exception e)
         {
             e.printStackTrace();
         }
+        System.out.println("Reach");
     }
 
-
     @FXML
-    void closeWindow(){
+    public void closeWindow(){
         Stage stage=(Stage) ScheduleTabButton.getScene().getWindow();
         stage.close();
-
     }
 
     @FXML
