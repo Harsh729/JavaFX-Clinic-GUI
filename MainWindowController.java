@@ -23,6 +23,7 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 //TODO: add functionality to "Edit" button
 //TODO: add functionality to MenuBar
+//TODO: start changeSlotWindow
 public class MainWindowController implements Initializable {
 
     private String dir="C:/Anand/Code Projects!/Directories/";
@@ -246,7 +247,10 @@ public class MainWindowController implements Initializable {
     private DatePicker ScheduleDatePicker;
 
     @FXML
-    private Button ScheduleTableEditButton;
+    private Button ChangeAppointmentButton;
+
+    @FXML
+    private Button ChangeSlotButton;
 
     @FXML
     private AnchorPane PrescriptionsTabAnchorPane;
@@ -310,7 +314,7 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
-    void openScheduleEditWindow(ActionEvent event) {
+    void openchangeAppointmentWindow(ActionEvent event) {
 
     }
 
@@ -329,8 +333,31 @@ public class MainWindowController implements Initializable {
         {
             e.printStackTrace();
         }
-        System.out.println("Reach");
+        //System.out.println("Reach");
     }
+
+    @FXML
+    public void openChangeSlotWindow()
+    {
+        SingleScheduleEntry selected=(SingleScheduleEntry)ScheduleTable.getSelectionModel().getSelectedItem();
+        ChangeSlotWindowMain obj=new ChangeSlotWindowMain();
+        obj.setSelectedRow(selected);
+        obj.setMainWindowController(this);
+        obj.setSchedule(schedule);
+        Stage stage=new Stage();
+        try
+        {
+            obj.start(stage);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void openChangeAppointmentWindow()
+    {}
 
     @FXML
     public void closeWindow(){

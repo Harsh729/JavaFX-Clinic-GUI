@@ -87,6 +87,11 @@
                         <TableView fx:id="PatientTable" prefHeight="560.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
+                        <AnchorPane fx:id="LabWorkAnchorPane" layoutY="-2.0" prefHeight="562.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+                            <children>
+                                <TableView fx:id="LabWorkTable" prefHeight="560.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            </children>
+                        </AnchorPane>
                         <AnchorPane fx:id="ScheduleAnchorPane" layoutX="2.0" prefHeight="560.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
                                 <SplitPane dividerPositions="0.8781362007168458" orientation="VERTICAL" prefHeight="560.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -100,14 +105,15 @@
                                             <children>
                                                 <HBox alignment="CENTER_RIGHT" prefHeight="107.0" prefWidth="675.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
                                                     <children>
-                                                        <DatePicker fx:id="ScheduleDatePicker" onAction="#setScheduleDate" HBox.hgrow="ALWAYS">
-                                                            <HBox.margin>
-                                                                <Insets />
-                                                            </HBox.margin>
-                                                        </DatePicker>
-                                                        <Button fx:id="ScheduleTableEditButton" mnemonicParsing="false" onAction="#openScheduleEditWindow" prefHeight="42.0" prefWidth="85.0" text="Edit" HBox.hgrow="ALWAYS">
+                                                        <DatePicker fx:id="ScheduleDatePicker" onAction="#setScheduleDate" />
+                                          <Button fx:id="ChangeSlotButton" mnemonicParsing="false" onAction="#openChangeSlotWindow" prefHeight="45.0" prefWidth="181.0" text="Change Slot">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Button>
+                                                        <Button fx:id="ChangeAppointmentButton" mnemonicParsing="false" onAction="#openChangeAppointmentWindow" prefHeight="45.0" prefWidth="181.0" text="Change Appointment" HBox.hgrow="ALWAYS">
                                                             <font>
-                                                                <Font name="System Bold" size="21.0" />
+                                                                <Font name="System Bold" size="15.0" />
                                                             </font>
                                                         </Button>
                                           <Button fx:id="ScheduleTableAddButton" mnemonicParsing="false" onAction="#openScheduleAddWindow" prefHeight="42.0" prefWidth="85.0" text="Add">
@@ -127,11 +133,6 @@
                                         </AnchorPane>
                                     </items>
                                 </SplitPane>
-                            </children>
-                        </AnchorPane>
-                        <AnchorPane fx:id="LabWorkAnchorPane" layoutY="-2.0" prefHeight="562.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
-                            <children>
-                                <TableView fx:id="LabWorkTable" prefHeight="560.0" prefWidth="674.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                             </children>
                         </AnchorPane>
                     </children>

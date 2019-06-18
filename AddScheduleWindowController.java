@@ -16,7 +16,8 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-
+//TODO: combobox not working properly, probably have to update it from FXUtilities
+//TODO: make an updateData method to reflect changes done in util. comboBox is null?
 public class AddScheduleWindowController implements Initializable {
 
 
@@ -35,7 +36,20 @@ public class AddScheduleWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        createComboBoxItems();
+        util=new FXUtilities(slotChooserStart,slotChooserEnd,schedule,data,slotStart,slotEnd);
+        util.createComboBoxItems();
+        updateData();
+        System.out.println(slotStart);
+    }
+
+    public void updateData()
+    {
+        slotChooserStart=util.slotChooserStart;
+        slotChooserEnd=util.slotChooserEnd;
+        data=util.data;
+        schedule=util.schedule;
+        slotStart=util.slotStart;
+        slotEnd=util.slotEnd;
     }
 
     @FXML
@@ -93,6 +107,8 @@ public class AddScheduleWindowController implements Initializable {
 
     public static MainWindowController obj;//for closing
 
+    FXUtilities util;
+
    @FXML
    public void save()
     {
@@ -108,7 +124,8 @@ public class AddScheduleWindowController implements Initializable {
             {
                 RecordFile rf=new RecordFile(newPatient);
             }
-            LinkedList<String> timeSlotsString=getTimeSlot();
+            util.setSlots(slotStart,slotEnd);
+            LinkedList<String> timeSlotsString=util.getTimeSlot();
             LinkedList<Slot>  timeSlotsSlot=new LinkedList<>();
             ScheduleFile newScheduleFile=new ScheduleFile(schedule);
             for(int i=0;i<timeSlotsString.size();i++)
@@ -135,11 +152,10 @@ public class AddScheduleWindowController implements Initializable {
     @FXML
     public void setSlotStart(ActionEvent event)
     {
-
         slotStart=slotChooserStart.getValue().toString();
         System.out.println(slotStart);
-//        slotChooserEnd.getItems().clear();
-        slotChooserEnd.setItems(getValidSlots(slotStart));
+        slotChooserEnd.setItems(util.getValidSlots(slotStart));
+        System.out.println(slotEnd);
     }
 
     @FXML
@@ -153,111 +169,5 @@ public class AddScheduleWindowController implements Initializable {
     {
         Stage stage=(Stage)cancelButton.getScene().getWindow();
         stage.close();
-    }
-
-    public LinkedList<String> generateAllSlots()
-    {
-        LinkedList<String> availableSlots=new LinkedList<>();
-        double ctr=15;
-        while(ctr<21)
-        {
-            double minutes[]={0.00,0.25,0.50,0.75};
-            for(int i=0;i<3;i++)
-            {
-
-                availableSlots.add((ctr+minutes[i])+" - "+(ctr+minutes[i+1]));
-            }
-            availableSlots.add((ctr+minutes[3])+" - "+(++ctr+minutes[0]));
-        }
-        return availableSlots;
-    }
-
-    public LinkedList<String> generateOccupiedSlots()
-    {
-        LinkedList<Slot> slots=new LinkedList<>();
-        try
-        {
-            slots=schedule.getSlots();
-        }
-        catch(NullPointerException e)
-        {
-            System.err.println("Null pointer exception, probably because File was not found");
-        }
-        LinkedList<String> occupiedSlots=new LinkedList<>();
-        Iterator itr=slots.iterator();
-        while(itr.hasNext())
-        {
-            occupiedSlots.add(((Slot)itr.next()).displaySlot());
-        }
-        return occupiedSlots;
-    }
-
-    public LinkedList<String> generateAvailableSlots(LinkedList<String> availableSlots,LinkedList<String> occupiedSlots)
-    {
-        for(int i=0;i<occupiedSlots.size();i++)
-        {
-            for(int j=0;j<availableSlots.size();j++)
-            {
-                if(occupiedSlots.get(i).equals(availableSlots.get(j)))
-                {
-                    availableSlots.remove(j);
-                    break;
-                }
-            }
-        }
-        return availableSlots;
-    }
-
-    public ObservableList<String> getValidSlots(String slot)
-    {
-        ObservableList<String> dataCopy=FXCollections.observableArrayList(data);
-        int n=dataCopy.size();
-        for(int i=0;i<n;i++)
-        {
-            if(slot.equals(dataCopy.get(0)))
-            {
-                break;
-            }
-            dataCopy.remove(0);
-        }
-        return dataCopy;
-    }
-
-    public void createComboBoxItems()
-    {
-         LinkedList<String> occupiedSlots=generateOccupiedSlots();
-
-         LinkedList<String> availableSlots=generateAllSlots();
-
-         availableSlots=generateAvailableSlots(availableSlots,occupiedSlots);
-
-         data=FXCollections.observableList(availableSlots);
-
-         try {
-             slotChooserStart.setPromptText("Start Time");
-             slotChooserEnd.setPromptText("End Time");
-             slotChooserStart.setItems(data);
-             slotChooserEnd.setItems(data);
-             }
-
-         catch(NullPointerException e)
-         {
-             System.err.println("Null pointer exception, probably because File was not found");
-         }
-    }
-
-    public LinkedList<String> getTimeSlot()
-    {
-        LinkedList<String> allSlots=generateAllSlots();
-        LinkedList<String> selectedSlots=new LinkedList<>();
-
-        int start=allSlots.indexOf(slotStart);
-        int end=allSlots.indexOf(slotEnd);
-
-        for(int i=start;i<=end;i++)
-        {
-            selectedSlots.add(allSlots.get(i));
-        }
-        return selectedSlots;
     }
 }

@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-//TODO: add a close /terminate method to restart the window
 public class Main extends Application {
 
     @Override
