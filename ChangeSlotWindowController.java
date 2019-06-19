@@ -19,22 +19,36 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
-//TODO: implement passed values in changeSlotWindowController
-//TODO: combobox not working properly, probably have to update it from FXUtilities
+//TODO: endSlot generation
+//TODO: properly implement editing of schedule
 public class ChangeSlotWindowController implements Initializable {
 
     public static Schedule schedule=new Schedule();
-    Slot slot;
+    Slot slot=new Slot();
     static MainWindowController obj=new MainWindowController();
     public static Appointment app=new Appointment();
     public static SingleScheduleEntry row=new SingleScheduleEntry(app);
     Appointment appointment=row.getAppointment();
 
+    String slotStart="";
+    String slotEnd="";
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        FXUtilities util=new FXUtilities(slotChooserStart,slotChooserEnd,schedule,data,slotStart,slotEnd);
+        util=new FXUtilities(slotChooserStart,slotChooserEnd,schedule,data,slotStart,slotEnd);
         util.createComboBoxItems();
+        updateData();
+    }
+
+    public void updateData()
+    {
+        slotChooserStart=util.slotChooserStart;
+        slotChooserEnd=util.slotChooserEnd;
+        data=util.data;
+        schedule=util.schedule;
+        slotStart=util.slotStart;
+        slotEnd=util.slotEnd;
     }
 
     @FXML
@@ -72,8 +86,7 @@ public class ChangeSlotWindowController implements Initializable {
 
     ObservableList<String> data= FXCollections.observableArrayList();
 
-    String slotStart="";
-    String slotEnd="";
+    FXUtilities util;
 
     @FXML
     void cancel() {
@@ -83,8 +96,8 @@ public class ChangeSlotWindowController implements Initializable {
 
     @FXML
     void save(ActionEvent event) {
-        FXUtilities util=new FXUtilities(slotChooserStart,slotChooserEnd,schedule,data,slotStart,slotEnd);
         try {
+            util.setSlots(slotStart,slotEnd);
             LinkedList<String> timeSlotString=util.getTimeSlot();
             LinkedList<Slot> timeSlotSlot=new LinkedList<>();
             ScheduleFile newScheduleFile=new ScheduleFile(schedule);
@@ -113,11 +126,10 @@ public class ChangeSlotWindowController implements Initializable {
 
     @FXML
     void setSlotStart(ActionEvent event) {
-        FXUtilities util=new FXUtilities(slotChooserStart,slotChooserEnd,schedule,data,slotStart,slotEnd);
         slotStart=slotChooserStart.getValue().toString();
         System.out.println(slotStart);
 //        slotChooserEnd.getItems().clear();
-        slotChooserStart.setItems(util.getValidSlots(slotStart));
+        slotChooserEnd.setItems(util.getValidSlots(slotStart));
     }
 
 }
