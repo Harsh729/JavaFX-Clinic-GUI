@@ -16,8 +16,7 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-//TODO: combobox not working properly, probably have to update it from FXUtilities
-//TODO: make an updateData method to reflect changes done in util. comboBox is null?
+
 public class AddScheduleWindowController implements Initializable {
 
 

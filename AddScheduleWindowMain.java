@@ -21,6 +21,7 @@ public class AddScheduleWindowMain extends Application {
         AddScheduleWindowController.obj=obj;
     }
 
+
     public void setMainWindowController(MainWindowController obj)
     {
         this.obj=obj;

@@ -43,12 +43,12 @@
                     <children>
                         <VBox prefHeight="201.0" prefWidth="218.0" styleClass="tab-button" AnchorPane.bottomAnchor="359.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
-                                <Button id="tab-button" fx:id="ScheduleTabButton" mnemonicParsing="false" onAction="#openScheduleTab" prefHeight="56.0" prefWidth="218.0" text="Schedule" VBox.vgrow="ALWAYS">
+                                <Button id="tab-button" fx:id="ScheduleTabButton" mnemonicParsing="false" onAction="#openScheduleTab" prefHeight="56.0" prefWidth="218.0" styleClass="tab-button-selected" text="Schedule" VBox.vgrow="ALWAYS">
                                     <font>
                                         <Font name="System Bold" size="23.0" />
                                     </font>
                                 </Button>
-                                <Button id="tab-button" fx:id="LabWorkTabButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#openLabWorkTab" prefHeight="56.0" prefWidth="218.0" styleClass="tab-button-selected" text="Lab Work">
+                                <Button id="tab-button" fx:id="LabWorkTabButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#openLabWorkTab" prefHeight="56.0" prefWidth="218.0" text="Lab Work">
                                     <font>
                                         <Font name="System Bold" size="23.0" />
                                     </font>

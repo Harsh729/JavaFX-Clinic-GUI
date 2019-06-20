@@ -19,7 +19,6 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
-//TODO: endSlot generation
 //TODO: properly implement editing of schedule
 public class ChangeSlotWindowController implements Initializable {
 
