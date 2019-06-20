@@ -21,9 +21,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-//TODO: add functionality to "Edit" button
 //TODO: add functionality to MenuBar
-//TODO: start changeSlotWindow
+//TODO: weird filewriting bugs after changing appointment and adding
 public class MainWindowController implements Initializable {
 
     private String dir="C:/Anand/Code Projects!/Directories/";
@@ -357,7 +356,22 @@ public class MainWindowController implements Initializable {
     }
 
     public void openChangeAppointmentWindow()
-    {}
+    {
+        SingleScheduleEntry row=(SingleScheduleEntry)ScheduleTable.getSelectionModel().getSelectedItem();
+        ChangeAppointmentWindowMain obj=new ChangeAppointmentWindowMain();
+        obj.setSelectedRow(row);
+        obj.setMainWindowController(this);
+        obj.setSchedule(schedule);
+        Stage stage=new Stage();
+        try
+        {
+            obj.start(stage);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void closeWindow(){
