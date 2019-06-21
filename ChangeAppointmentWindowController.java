@@ -92,6 +92,7 @@ public class ChangeAppointmentWindowController
                 ScheduleFile newScheduleFile=new ScheduleFile(schedule);
                 Appointment newAppointment=row.getAppointment();
                 newAppointment.setPatient(newPatient);
+                newAppointment.setProcedure(descriptionTextArea.getText());
                 AppointmentFile appointmentFile=new AppointmentFile(newAppointment);
                 if(newScheduleFile.editEntry(newAppointment)==null)
                 {

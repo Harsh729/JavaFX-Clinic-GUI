@@ -131,6 +131,7 @@ public class AddScheduleWindowController implements Initializable {
             {
                 timeSlotsSlot.add(slot.toSlot(timeSlotsString.get(i)));
                 Appointment newAppointment=new Appointment(newPatient,schedule.getDate(),timeSlotsSlot.get(i));
+                newAppointment.setProcedure(descriptionTextArea.getText());
                 AppointmentFile appointmentFile=new AppointmentFile(newAppointment);
                 if(newScheduleFile.addEntry(newAppointment)==null)
                 {
