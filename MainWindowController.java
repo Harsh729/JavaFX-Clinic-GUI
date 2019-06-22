@@ -23,6 +23,7 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 //TODO: add functionality to MenuBar
 //TODO: weird filewriting bugs after changing appointment and adding
+//TODO: change naming system for appointments
 public class MainWindowController implements Initializable {
 
     private String dir="C:/Anand/Code Projects!/Directories/";

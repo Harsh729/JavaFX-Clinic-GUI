@@ -38,7 +38,7 @@ public class AddScheduleWindowController implements Initializable {
         util=new FXUtilities(slotChooserStart,slotChooserEnd,schedule,data,slotStart,slotEnd);
         util.createComboBoxItems();
         updateData();
-        System.out.println(slotStart);
+        //System.out.println(slotStart);
     }
 
     public void updateData()
@@ -153,9 +153,9 @@ public class AddScheduleWindowController implements Initializable {
     public void setSlotStart(ActionEvent event)
     {
         slotStart=slotChooserStart.getValue().toString();
-        System.out.println(slotStart);
+        //System.out.println(slotStart);
         slotChooserEnd.setItems(util.getValidSlots(slotStart));
-        System.out.println(slotEnd);
+        //System.out.println(slotEnd);
     }
 
     @FXML
