@@ -375,6 +375,27 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
+    public void deleteScheduleEntry()
+    {
+        SingleScheduleEntry row=(SingleScheduleEntry)ScheduleTable.getSelectionModel().getSelectedItem();
+        try
+        {
+            ScheduleFile file=new ScheduleFile(schedule);
+            if(file.deleteEntry(row.getSlot())==null)
+            {
+                System.out.println("Deleted successfully.");
+            }
+            initializeScheduleTable(schedule.getDate());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @FXML
     public void closeWindow(){
         Stage stage=(Stage) ScheduleTabButton.getScene().getWindow();
         stage.close();
