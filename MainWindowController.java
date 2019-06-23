@@ -206,13 +206,13 @@ public class MainWindowController implements Initializable {
     private MenuItem Menu_File_Close;
 
     @FXML
-    private MenuItem Menu_File_OpenPatient;
+    private MenuItem Menu_File_CreateLabWork;
 
     @FXML
-    private MenuItem Menu_File_OpenLabRecords;
+    private MenuItem Menu_File_CreatePrescriptions;
 
     @FXML
-    private MenuItem Menu_File_OpenPrescriptions;
+    private MenuItem Menu_File_CreateSchedule;
 
     @FXML
     private MenuItem Menu_File_CreateRecord;
@@ -315,11 +315,6 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
-    void openchangeAppointmentWindow(ActionEvent event) {
-
-    }
-
-    @FXML
     void openScheduleAddWindow(ActionEvent event)
     {
         AddScheduleWindowController obj=new AddScheduleWindowController();
@@ -357,6 +352,7 @@ public class MainWindowController implements Initializable {
 
     }
 
+    @FXML
     public void openChangeAppointmentWindow()
     {
         SingleScheduleEntry row=(SingleScheduleEntry)ScheduleTable.getSelectionModel().getSelectedItem();
@@ -405,8 +401,6 @@ public class MainWindowController implements Initializable {
     @FXML
     public void createRecord(){
         try {
-
-
             CreateRecordMain obj = new CreateRecordMain();
             Stage stage = new Stage();
             obj.start(stage);
@@ -418,26 +412,25 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
-    void openPatientRecord(){}
+    void createLabWork(){
+        CreateLabWorkMain obj=new CreateLabWorkMain();
+        Stage stage=new Stage();
+        obj.start(stage);
+    }
 
     @FXML
-    void openLabRecords(){}
+    void createPrescription(){}
 
     @FXML
-    void openPrescriptions(){}
+    void createSchedule(){}
 
     @FXML
     void setScheduleDate(){
-        String mydate=dateExtract();
+        MyDate date=new MyDate(ScheduleDatePicker.getValue().toString());
+        String mydate=date.toString();
         System.out.println(mydate);
         //ScheduleTable.getColumns().clear();
         initializeScheduleTable(mydate);
-    }
-
-    String dateExtract()
-    {
-        String date[]=ScheduleDatePicker.getValue().toString().split("-");
-        return date[2]+"-"+date[1]+"-"+date[0];
     }
 
     @FXML

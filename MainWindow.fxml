@@ -20,10 +20,10 @@
                 <Menu id="head" fx:id="MenuBar_Menu_File" mnemonicParsing="false" text="File">
                     <items>
                         <MenuItem fx:id="Menu_File_Close" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
-                        <MenuItem fx:id="Menu_File_OpenPatient" mnemonicParsing="false" onAction="#openPatientRecord" text="Open Patient" />
-                        <MenuItem fx:id="Menu_File_OpenLabRecords" mnemonicParsing="false" onAction="#openLabRecords" text="Open LabWork" />
+                        <MenuItem fx:id="Menu_File_CreateLabWork" mnemonicParsing="false" onAction="#createLabWork" text="Create LabWork" />
+                  <MenuItem fx:id="Menu_File_CreateSchedule" mnemonicParsing="false" onAction="#createSchedule" text="Create Schedule" />
                   <MenuItem fx:id="Menu_File_CreateRecord" mnemonicParsing="false" onAction="#createRecord" text="Create Record(Patient)" />
-                        <MenuItem fx:id="Menu_File_OpenPrescriptions" mnemonicParsing="false" onAction="#openPrescriptions" text="Open Prescription" />
+                        <MenuItem fx:id="Menu_File_CreatePrescription" mnemonicParsing="false" onAction="#createPrescription" text="Create Prescription" />
                     </items>
                 </Menu>
                 <Menu id="head" fx:id="MenuBar_Menu_Edit" mnemonicParsing="false" text="Edit">
