@@ -22,8 +22,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 //TODO: add functionality to MenuBar
-//TODO: weird filewriting bugs after changing appointment and adding
-//TODO: change naming system for appointments
 public class MainWindowController implements Initializable {
 
     private String dir="C:/Anand/Code Projects!/Directories/";
@@ -217,6 +215,9 @@ public class MainWindowController implements Initializable {
     private MenuItem Menu_File_OpenPrescriptions;
 
     @FXML
+    private MenuItem Menu_File_CreateRecord;
+
+    @FXML
     private Menu MenuBar_Menu_Edit;
 
     @FXML
@@ -399,6 +400,21 @@ public class MainWindowController implements Initializable {
     public void closeWindow(){
         Stage stage=(Stage) ScheduleTabButton.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    public void createRecord(){
+        try {
+
+
+            CreateRecordMain obj = new CreateRecordMain();
+            Stage stage = new Stage();
+            obj.start(stage);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @FXML

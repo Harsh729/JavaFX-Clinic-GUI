@@ -20,8 +20,8 @@ public class ChangeAppointmentWindowMain extends Application {
     ChangeAppointmentWindowController.row=row;
     ChangeAppointmentWindowController.schedule=schedule;
     AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("ChangeAppointmentWindow.fxml"));
-        primaryStage.setTitle("Change Slot");
-        primaryStage.setScene(new Scene(anchorPane,400,254));
+        primaryStage.setTitle("Change Appointment");
+        primaryStage.setScene(new Scene(anchorPane,400,275));
         primaryStage.show();
 }
 

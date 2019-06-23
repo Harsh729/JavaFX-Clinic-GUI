@@ -22,6 +22,7 @@
                         <MenuItem fx:id="Menu_File_Close" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
                         <MenuItem fx:id="Menu_File_OpenPatient" mnemonicParsing="false" onAction="#openPatientRecord" text="Open Patient" />
                         <MenuItem fx:id="Menu_File_OpenLabRecords" mnemonicParsing="false" onAction="#openLabRecords" text="Open LabWork" />
+                  <MenuItem fx:id="Menu_File_CreateRecord" mnemonicParsing="false" onAction="#createRecord" text="Create Record(Patient)" />
                         <MenuItem fx:id="Menu_File_OpenPrescriptions" mnemonicParsing="false" onAction="#openPrescriptions" text="Open Prescription" />
                     </items>
                 </Menu>
