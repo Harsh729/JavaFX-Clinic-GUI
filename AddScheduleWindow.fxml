@@ -35,21 +35,24 @@
                 </AnchorPane>
                 <AnchorPane fx:id="buttonPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
-                        <ButtonBar fx:id="buttonBar" layoutY="97.0" prefHeight="47.0" prefWidth="398.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+                        <ButtonBar fx:id="buttonBar" layoutY="-2.0" prefHeight="47.0" prefWidth="398.0">
                             <buttons>
-                                <HBox fx:id="buttonBox" spacing="10.0">
+                                <HBox fx:id="buttonBox" prefHeight="42.0" prefWidth="399.0" spacing="10.0">
                                     <children>
-                                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+                              <Button fx:id="CreateRecordButton" mnemonicParsing="false" onAction="#createRecord" text="+Record" />
+                              <Button fx:id="CreateLabWorkButton" mnemonicParsing="false" onAction="#createLabWork" text="+LabWork" />
+                              <Button fx:id="CreatePrescriptionButton" mnemonicParsing="false" onAction="#createPrescription" text="+Prescription" />
+                                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancel" text="Cancel">
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin></Button>
                                         <Button fx:id="acceptButton" mnemonicParsing="false" onAction="#save" text="OK" />
                                     </children>
                                     <padding>
-                                        <Insets left="5.0" right="5.0" top="5.0" />
+                                        <Insets left="5.0" right="5.0" top="10.0" />
                                     </padding>
                                 </HBox>
                             </buttons>
-                            <padding>
-                                <Insets left="5.0" right="5.0" top="5.0" />
-                            </padding>
                         </ButtonBar>
                     </children>
                 </AnchorPane>

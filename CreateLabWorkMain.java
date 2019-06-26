@@ -1,5 +1,6 @@
 package sample;
 
+import ClinicSoftware.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,6 +22,16 @@ public class CreateLabWorkMain extends Application {
         {
             e.printStackTrace();
         }
+    }
+
+    public void setPatientName(String name)
+    {
+        CreateLabWorkController.name=name;
+    }
+
+    public void setObj(AddScheduleWindowController obj)
+    {
+        CreateLabWorkController.obj=obj;
     }
 
     public static void main(String args[])

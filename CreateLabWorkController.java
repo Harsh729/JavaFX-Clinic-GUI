@@ -9,6 +9,10 @@ import javafx.stage.Stage;
 
 public class CreateLabWorkController {
 
+    public static String name="";
+
+    public static AddScheduleWindowController obj=new AddScheduleWindowController();
+
     @FXML
     private Button CancelButton;
 
@@ -42,6 +46,7 @@ public class CreateLabWorkController {
         MyDate receivedDate=new MyDate(ReceivedDatePicker.getValue().toString());
         LabWork newLabWork=new LabWork(sentDate.toString(),receivedDate.toString(),LabNameTextField.getText(),LabWorkTextField.getText(),PatientNameTextField.getText());
         LabWorkFile file=new LabWorkFile(newLabWork);
+        obj.setLab(newLabWork);
         closeWindow();
     }
 

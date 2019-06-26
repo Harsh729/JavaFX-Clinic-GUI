@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 public class CreateRecordController {
 
+    public static AddScheduleWindowController obj=new AddScheduleWindowController();
+
     @FXML
     private TextField NameTextField;
 
@@ -52,6 +54,7 @@ public class CreateRecordController {
         {
             Record newRecord=new Record(NameTextField.getText(),PhoneTextField.getText(),"",Integer.valueOf(AgeTextField.getText()),DescriptionTextArea.getText(),"",HeartConditionCheckBox.isSelected(),AllergiesCheckBox.isSelected(),BloodPressureCheckBox.isSelected(),DiabetesCheckBox.isSelected());
             RecordFile newFile=new RecordFile(newRecord);
+            obj.setRecord(newRecord);
             closeWindow();
         }
         catch(Exception e)

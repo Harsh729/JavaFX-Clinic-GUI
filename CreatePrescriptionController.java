@@ -1,5 +1,4 @@
 package sample;
-//TODO: think of way to add multiple medicines
 //TODO: add createLabWork,create Record and this to addEntry in Schedule
 
 import ClinicSoftware.*;
@@ -11,6 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class CreatePrescriptionController {
+
+    public static AddScheduleWindowController obj=new AddScheduleWindowController();
+
+    public static String name="";
 
     @FXML
     private Button CancelButton;
@@ -49,6 +52,7 @@ public class CreatePrescriptionController {
             newPrescription.addMedicineEntry(meds[i],instructions[i]);
         }
         PrescriptionFile file=new PrescriptionFile(newPrescription);
+        obj.setPrescription(newPrescription);
         closeWindow();
     }
 

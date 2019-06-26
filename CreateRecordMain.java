@@ -18,6 +18,11 @@ public class CreateRecordMain extends Application {
         primaryStage.show();
     }
 
+    public void setObj(AddScheduleWindowController obj)
+    {
+        CreateRecordController.obj=obj;
+    }
+
     public static void main(String args[])
     {
         launch(args);

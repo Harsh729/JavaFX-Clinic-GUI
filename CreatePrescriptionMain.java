@@ -7,6 +7,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class CreatePrescriptionMain extends Application {
+
+    public void setObj(AddScheduleWindowController obj)
+    {
+        CreatePrescriptionController.obj=obj;
+    }
+
+    public void setPatientName(String name)
+    {
+        CreatePrescriptionController.name=name;
+    }
+
     public void start(Stage primaryStage)
     {
         try {

@@ -16,12 +16,18 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
+//TODO: implement name setting in Lab and Pre
 
 public class AddScheduleWindowController implements Initializable {
 
 
     String slotStart;
     String slotEnd;
+
+    LabWork lab=new LabWork();
+    Prescription pre=new Prescription();
+    Record record=new Record();
+
 
     Slot slot=new Slot();
 
@@ -102,6 +108,15 @@ public class AddScheduleWindowController implements Initializable {
     @FXML
     private Button acceptButton;
 
+    @FXML
+    private Button CreateRecordButton;
+
+    @FXML
+    private Button CreateLabWorkButton;
+
+    @FXML
+    private Button CreatePrescriptionButton;
+
     private ObservableList<String> data=FXCollections.observableArrayList();
 
     public static MainWindowController obj;//for closing
@@ -123,6 +138,10 @@ public class AddScheduleWindowController implements Initializable {
             {
                 RecordFile rf=new RecordFile(newPatient);
             }
+            if(record.getName()!="")
+            {
+                newPatient=record;
+            }
             util.setSlots(slotStart,slotEnd);
             LinkedList<String> timeSlotsString=util.getTimeSlot();
             LinkedList<Slot>  timeSlotsSlot=new LinkedList<>();
@@ -132,6 +151,10 @@ public class AddScheduleWindowController implements Initializable {
                 timeSlotsSlot.add(slot.toSlot(timeSlotsString.get(i)));
                 Appointment newAppointment=new Appointment(newPatient,schedule.getDate(),timeSlotsSlot.get(i));
                 newAppointment.setProcedure(descriptionTextArea.getText());
+                if(lab.getSentDate()!="")
+                    newAppointment.setLab(lab);
+                if(pre.getPatientName()!="")
+                    newAppointment.setPrescription(pre);
                 AppointmentFile appointmentFile=new AppointmentFile(newAppointment);
                 if(newScheduleFile.addEntry(newAppointment)==null)
                 {
@@ -169,5 +192,69 @@ public class AddScheduleWindowController implements Initializable {
     {
         Stage stage=(Stage)cancelButton.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    public void createRecord()
+    {
+        try {
+            CreateRecordMain obj = new CreateRecordMain();
+            Stage stage = new Stage();
+            obj.start(stage);
+            obj.setObj(this);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void setRecord(Record record)
+    {
+        this.record=record;
+    }
+
+    @FXML
+    public void createLabWork()
+    {
+        try
+        {
+            CreateLabWorkMain obj=new CreateLabWorkMain();
+            Stage stage=new Stage();
+            obj.start(stage);
+            obj.setPatientName(nameTextField.getText());
+            obj.setObj(this);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void setLab(LabWork lab)
+    {
+        this.lab=lab;
+    }
+
+    @FXML
+    public void createPrescription()
+    {
+        try
+        {
+            CreatePrescriptionMain obj=new CreatePrescriptionMain();
+            Stage stage=new Stage();
+            obj.start(stage);
+            obj.setObj(this);
+            obj.setPatientName(nameTextField.getText());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void setPrescription(Prescription pre)
+    {
+        this.pre=pre;
     }
 }
