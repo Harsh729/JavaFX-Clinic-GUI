@@ -419,7 +419,11 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
-    void createPrescription(){}
+    void createPrescription(){
+        CreatePrescriptionMain obj=new CreatePrescriptionMain();
+        Stage stage=new Stage();
+        obj.start(stage);
+    }
 
     @FXML
     void createSchedule(){}
