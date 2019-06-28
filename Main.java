@@ -9,7 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 public class Main extends Application {
-
+//TODO: Add Dr. Chaitali's Schedule Window
+//TODO: Add Money functionality
     @Override
     public void start(Stage primaryStage) throws Exception{
         VBox vBox = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));

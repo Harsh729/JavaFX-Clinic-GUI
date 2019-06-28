@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-//TODO: implement name setting in Lab and Pre
+//TODO: implement name setting in Lab and Pre (maybe I don't want to do that)
 
 public class AddScheduleWindowController implements Initializable {
 
@@ -94,6 +94,9 @@ public class AddScheduleWindowController implements Initializable {
     private TextArea descriptionTextArea;
 
     @FXML
+    private TextField priceTextField;
+
+    @FXML
     private AnchorPane buttonPane;
 
     @FXML
@@ -146,11 +149,16 @@ public class AddScheduleWindowController implements Initializable {
             LinkedList<String> timeSlotsString=util.getTimeSlot();
             LinkedList<Slot>  timeSlotsSlot=new LinkedList<>();
             ScheduleFile newScheduleFile=new ScheduleFile(schedule);
+            boolean isPriceAdded=false;
             for(int i=0;i<timeSlotsString.size();i++)
             {
                 timeSlotsSlot.add(slot.toSlot(timeSlotsString.get(i)));
                 Appointment newAppointment=new Appointment(newPatient,schedule.getDate(),timeSlotsSlot.get(i));
                 newAppointment.setProcedure(descriptionTextArea.getText());
+                if(!isPriceAdded) {
+                    newAppointment.setPrice(Double.valueOf(priceTextField.getText()));
+                    isPriceAdded=true;
+                }
                 if(lab.getSentDate()!="")
                     newAppointment.setLab(lab);
                 if(pre.getPatientName()!="")

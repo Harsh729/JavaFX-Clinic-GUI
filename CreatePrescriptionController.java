@@ -1,5 +1,4 @@
 package sample;
-//TODO: add createLabWork,create Record and this to addEntry in Schedule
 
 import ClinicSoftware.*;
 import javafx.fxml.FXML;

@@ -163,6 +163,14 @@ public class MainWindowController implements Initializable {
 
     public void initializePatientTable()
     {
+        try {
+            PatientTable.getColumns().clear();
+        }
+        catch(NullPointerException e)
+        {
+            System.err.println("NullPointerException:");
+            e.printStackTrace();
+        }
         TableColumn patientName=new TableColumn("Patient Name");
         TableColumn phone=new TableColumn("Phone No.");
         TableColumn age=new TableColumn("Age");
@@ -173,7 +181,7 @@ public class MainWindowController implements Initializable {
         patientName.setCellValueFactory(new PropertyValueFactory<Record,String>("name"));
         phone.setCellValueFactory(new PropertyValueFactory<Record,String>("phone"));
         age.setCellValueFactory(new PropertyValueFactory<Record,Integer>("age"));
-        money.setCellValueFactory(new PropertyValueFactory<Record,Double>("paid"));
+        money.setCellValueFactory(new PropertyValueFactory<Record,Double>("money"));
 
         try{
             File folder=new File(dir+"Records\\");
@@ -252,6 +260,9 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private Button ChangeSlotButton;
+
+    @FXML
+    private Button PayButton;
 
     @FXML
     private AnchorPane PrescriptionsTabAnchorPane;
@@ -390,6 +401,16 @@ public class MainWindowController implements Initializable {
         }
 
 
+    }
+
+    @FXML
+    public void openPayWindow()
+    {
+        PayWindowMain obj=new PayWindowMain();
+        Stage stage=new Stage();
+        obj.start(stage);
+        obj.setSelected((SingleScheduleEntry)ScheduleTable.getSelectionModel().getSelectedItem());
+        obj.setObj(this);
     }
 
     @FXML
