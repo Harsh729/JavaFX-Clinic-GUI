@@ -51,6 +51,14 @@ public class MainWindowController implements Initializable {
         initializePatientTable();
     }
 
+    public void init(String date)
+    {
+        initializeLabWorkTable();
+        initializePrescriptionTable();
+        initializeScheduleTable(date);
+        initializePatientTable();
+    }
+
     public void initializeLabWorkTable()
     {
 
@@ -298,6 +306,7 @@ public class MainWindowController implements Initializable {
     void openLabWorkTab(ActionEvent event) {
         if(LabWorkTabButton.getStyleClass().size()<2)
         {
+            initializeLabWorkTable();
             LabWorkAnchorPane.toFront();
             LabWorkTabButton.getStyleClass().add("tab-button-selected");
             ScheduleTabButton.getStyleClass().remove("tab-button-selected");
@@ -320,6 +329,7 @@ public class MainWindowController implements Initializable {
     @FXML
     void openPrescriptionsTab(){
         if(PrescriptionsTabButton.getStyleClass().size()<2) {
+            initializePrescriptionTable();
             PrescriptionsTabAnchorPane.toFront();
             LabWorkTabButton.getStyleClass().remove("tab-button-selected");
             ScheduleTabButton.getStyleClass().remove("tab-button-selected");
@@ -332,6 +342,7 @@ public class MainWindowController implements Initializable {
     void openPatientTab()
     {
         if(PatientTabButton.getStyleClass().size()<2) {
+            initializePatientTable();
             PatientAnchorPane.toFront();
             LabWorkTabButton.getStyleClass().remove("tab-button-selected");
             ScheduleTabButton.getStyleClass().remove("tab-button-selected");
@@ -464,7 +475,12 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
-    void createSchedule(){}
+    void createSchedule(){
+        CreateScheduleMain obj=new CreateScheduleMain();
+        obj.setObj(this);
+        Stage stage=new Stage();
+        obj.start(stage);
+    }
 
     @FXML
     void setScheduleDate(){

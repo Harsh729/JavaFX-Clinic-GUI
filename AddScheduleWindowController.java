@@ -165,8 +165,10 @@ public class AddScheduleWindowController implements Initializable {
                 newAppointment.setUserSignature(userSignature);
                 if(!isPriceAdded) {
                     String check=priceTextField.getText();
-                    if(!priceTextField.getText().equals(""))
-                    newAppointment.setPrice(Double.valueOf(priceTextField.getText()));
+                    if(!priceTextField.getText().equals("")) {
+                        newAppointment.setPrice(Double.valueOf(priceTextField.getText()));
+                        newAppointment.reflect();
+                    }
                     isPriceAdded=true;
                 }
                 if(lab.getSentDate()!="")
@@ -186,7 +188,7 @@ public class AddScheduleWindowController implements Initializable {
             System.err.println("IOException caught.");
         }
         cancel();
-        obj.initializeScheduleTable(schedule.getDate());
+        obj.init(schedule.getDate());
     }
 
     @FXML
