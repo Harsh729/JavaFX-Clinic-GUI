@@ -9,19 +9,29 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 public class Main extends Application {
-//TODO: Add Dr. Chaitali's Schedule Window
-//TODO: Add Money functionality
+    String title="Dr. Parul Doshi";
     @Override
     public void start(Stage primaryStage) throws Exception{
         VBox vBox = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-        primaryStage.setTitle("Clinic Software");
+        primaryStage.setTitle(title);
         primaryStage.setScene(new Scene(vBox, 800, 500));
         primaryStage.show();
     }
 
+    public void setTitle(String title)
+    {
+        this.title=title;
+    }
+
+    public void setUserSignature(int userSignature)
+    {
+        MainWindowController.userSignature=userSignature;
+    }
+    public static int ctr=0;
     public static void open()
     {
         try {
+            ctr++;
             Stage stage = new Stage();
             Main obj = new Main();
             obj.start(stage);
@@ -31,6 +41,12 @@ public class Main extends Application {
             System.err.println("An unknown Exception occurred:");
             e.printStackTrace();
         }
+    }
+
+    public void Switch()
+    {
+        title="Dr. Chaitali";
+        setUserSignature(1);
     }
 
     public static void main(String[] args) {

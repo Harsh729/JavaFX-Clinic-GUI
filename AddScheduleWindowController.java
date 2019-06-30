@@ -126,6 +126,13 @@ public class AddScheduleWindowController implements Initializable {
 
     FXUtilities util;
 
+    public static int userSignature=0;
+
+    public void setUserSignature(int userSignature)
+    {
+        this.userSignature=userSignature;
+    }
+
    @FXML
    public void save()
     {
@@ -155,7 +162,10 @@ public class AddScheduleWindowController implements Initializable {
                 timeSlotsSlot.add(slot.toSlot(timeSlotsString.get(i)));
                 Appointment newAppointment=new Appointment(newPatient,schedule.getDate(),timeSlotsSlot.get(i));
                 newAppointment.setProcedure(descriptionTextArea.getText());
+                newAppointment.setUserSignature(userSignature);
                 if(!isPriceAdded) {
+                    String check=priceTextField.getText();
+                    if(!priceTextField.getText().equals(""))
                     newAppointment.setPrice(Double.valueOf(priceTextField.getText()));
                     isPriceAdded=true;
                 }
@@ -176,8 +186,7 @@ public class AddScheduleWindowController implements Initializable {
             System.err.println("IOException caught.");
         }
         cancel();
-        Main.open();
-        obj.closeWindow();
+        obj.initializeScheduleTable(schedule.getDate());
     }
 
     @FXML

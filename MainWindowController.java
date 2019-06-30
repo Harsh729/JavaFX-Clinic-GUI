@@ -29,6 +29,19 @@ public class MainWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        if(Main.ctr==0) {
+            Main.ctr++;
+            Main obj = new Main();
+            obj.setUserSignature(1);
+            obj.setTitle("Dr. Chaitali");
+            try {
+                obj.start(new Stage());
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
         initializeLabWorkTable();
         initializePrescriptionTable();
         MyDate date=new MyDate();
@@ -110,6 +123,7 @@ public class MainWindowController implements Initializable {
     public void initializeScheduleTable(String date)
     {
         try {
+            setUserSignature();
             ScheduleTable.getColumns().clear();
         }
         catch(NullPointerException e)
@@ -119,6 +133,7 @@ public class MainWindowController implements Initializable {
         schedule=new Schedule();
         ScheduleFile file=new ScheduleFile(date);
         try {
+            file.setUserSignature(userSignature);
             schedule = file.readFile();
         }
         catch(Exception e)
@@ -126,39 +141,38 @@ public class MainWindowController implements Initializable {
             e.printStackTrace();
         }
 
+            LinkedList<Appointment> appointments = new LinkedList<>();
 
-        LinkedList<Appointment> appointments=new LinkedList<>();
+            try {
 
-        try {
-
-            appointments = schedule.getAppointments();
-        }
-        catch(NullPointerException e)
-        {
-            System.err.println("Null pointer exception, probably because File was not found");
-        }
+                appointments = schedule.getAppointments();
+            } catch (NullPointerException e) {
+                System.err.println("Null pointer exception, probably because File was not found");
+            }
 
 
-        Iterator j=appointments.iterator();
+            Iterator j = appointments.iterator();
 
-        ObservableList<SingleScheduleEntry> data=FXCollections.observableArrayList();
+            ObservableList<SingleScheduleEntry> data = FXCollections.observableArrayList();
 
-        while(j.hasNext())
-        {
-            data.add(new SingleScheduleEntry((Appointment)j.next()));
-        }
+            while (j.hasNext()) {
+                Appointment app=new Appointment();
+                if((app=(Appointment)j.next()).getUserSignature()==userSignature)
+                data.add(new SingleScheduleEntry(app));
+            }
 
-        TableColumn slotColumn=new TableColumn("Time");
-        TableColumn appointmentColumnPatientName=new TableColumn("Appointment");
-        TableColumn description=new TableColumn("Description");
+            TableColumn slotColumn = new TableColumn("Time");
+            TableColumn appointmentColumnPatientName = new TableColumn("Appointment");
+            TableColumn description = new TableColumn("Description");
 
-        ScheduleTable.getColumns().addAll(slotColumn,appointmentColumnPatientName,description);
+            ScheduleTable.getColumns().addAll(slotColumn, appointmentColumnPatientName, description);
 
-        slotColumn.setCellValueFactory(new PropertyValueFactory<SingleScheduleEntry, String>("time"));
-        appointmentColumnPatientName.setCellValueFactory(new PropertyValueFactory<SingleScheduleEntry,String>("patientName"));
-        description.setCellValueFactory(new PropertyValueFactory<SingleScheduleEntry,String>("description"));
+            slotColumn.setCellValueFactory(new PropertyValueFactory<SingleScheduleEntry, String>("time"));
+            appointmentColumnPatientName.setCellValueFactory(new PropertyValueFactory<SingleScheduleEntry, String>("patientName"));
+            description.setCellValueFactory(new PropertyValueFactory<SingleScheduleEntry, String>("description"));
 
-        ScheduleTable.setItems(data);
+            ScheduleTable.setItems(data);
+
     }
 
     public void initializePatientTable()
@@ -203,6 +217,7 @@ public class MainWindowController implements Initializable {
     }
 
     public Schedule schedule;
+    public static int userSignature;
 
     @FXML
     private MenuBar mainMenuBar;
@@ -328,7 +343,9 @@ public class MainWindowController implements Initializable {
     @FXML
     void openScheduleAddWindow(ActionEvent event)
     {
+        setUserSignature();
         AddScheduleWindowController obj=new AddScheduleWindowController();
+        obj.setUserSignature(userSignature);
         obj.setSchedule(schedule);
         AddScheduleWindowMain obj2=new AddScheduleWindowMain();
         Stage stage=new Stage();
@@ -456,6 +473,28 @@ public class MainWindowController implements Initializable {
         System.out.println(mydate);
         //ScheduleTable.getColumns().clear();
         initializeScheduleTable(mydate);
+    }
+
+    public void setUserSignature(int userSignature) {
+        this.userSignature = userSignature;
+    }
+
+    public void setUserSignature()
+    {
+        Stage stage = (Stage) ScheduleDatePicker.getScene().getWindow();
+        String title = stage.getTitle();
+        switch (title)
+        {
+            case "Dr. Parul Doshi": userSignature=0;
+                break;
+            case "Dr. Chaitali": userSignature=1;
+                break;
+        }
+    }
+
+    public int getUserSignature()
+    {
+        return userSignature;
     }
 
     @FXML
