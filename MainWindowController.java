@@ -21,10 +21,10 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-//TODO: add functionality to MenuBar
+
 public class MainWindowController implements Initializable {
 
-    private String dir="C:/Anand/Code Projects!/Directories/";
+    private String dir=System.getProperty("user.dir")+"\\Directories\\";
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -61,6 +61,15 @@ public class MainWindowController implements Initializable {
 
     public void initializeLabWorkTable()
     {
+
+        try {
+            setUserSignature();
+            LabWorkTable.getColumns().clear();
+        }
+        catch(NullPointerException e)
+        {
+            System.err.println("Null pointer exception");
+        }
 
         TableColumn LabWorkSentDate=new TableColumn("Sent Date");
         TableColumn LabWorkPatientName=new TableColumn("Patient Name");
@@ -100,6 +109,15 @@ public class MainWindowController implements Initializable {
 
     public void initializePrescriptionTable()
     {
+        try {
+            setUserSignature();
+            PrescriptionsTable.getColumns().clear();
+        }
+        catch(NullPointerException e)
+        {
+            System.err.println("Null pointer exception");
+        }
+
         TableColumn PrescriptionDate=new TableColumn("Date");
         TableColumn PrescriptionPatientName=new TableColumn("Patient Name");
 
@@ -247,10 +265,7 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private MenuItem Menu_File_CreateRecord;
-
-    @FXML
-    private Menu MenuBar_Menu_Edit;
-
+    
     @FXML
     private Button ScheduleTabButton;
 

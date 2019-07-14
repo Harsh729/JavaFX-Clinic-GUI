@@ -16,7 +16,6 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-//TODO: implement name setting in Lab and Pre (maybe I don't want to do that)
 
 public class AddScheduleWindowController implements Initializable {
 

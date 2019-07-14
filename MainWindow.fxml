@@ -26,16 +26,6 @@
                         <MenuItem fx:id="Menu_File_CreatePrescription" mnemonicParsing="false" onAction="#createPrescription" text="Create Prescription" />
                     </items>
                 </Menu>
-                <Menu id="head" fx:id="MenuBar_Menu_Edit" mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                    </items>
-                </Menu>
-                <Menu id="head" mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
-                    </items>
-                </Menu>
             </menus>
         </MenuBar>
         <SplitPane dividerPositions="0.24610244988864144" VBox.vgrow="ALWAYS">
